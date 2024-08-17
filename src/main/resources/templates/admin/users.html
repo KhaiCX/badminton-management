@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/head :: head('Member Management')}">
+    <title></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav th:replace="~{/admin/navbar :: navbar}"></nav>
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 content">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Member Management</h1>
+            </div>
+            <div th:if="${message!=null}" class="alert alert-success text-center">
+                [[${message}]]
+            </div>
+            <!-- User Table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Prize</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td id="fullName" th:text="${user.fullName}"></td>
+                        <td th:text="${user.prize != null && user.prize != '' ? user.prize : 'Không có'}"></td>
+                        <td th:text="${user.role}"></td>
+                        <td>
+                            <!--<button class="btn btn-primary btn-sm">Edit</button>-->
+                            <button class="btn btn-danger btn-sm" data-toggle="modal">
+                                <a class="link-delete" style="text-decoration: none; color: black"
+                                   th:href="@{'/users/delete/' + ${user.id}}"
+                                   title="Delete this Member">
+                                    Delete
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Add New User Button -->
+            <div>
+                <button class="btn btn-success" onclick="window.location.href='/users/add-user'">Add New User</button>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

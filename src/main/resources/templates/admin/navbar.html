@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <nav class="col-md-2 d-none d-md-block sidebar" th:fragment="navbar">
+        <div class="sidebar-sticky">
+            <h4 class="text-white">Dashboard</h4>
+            <a th:href="@{/}">Overview</a>
+            <a th:href="@{/}">Articles</a>
+            <a th:href="@{/}">Analytics</a>
+            <a th:href="@{/users}">Users</a>
+            <a th:href="@{/}">Settings</a>
+        </div>
+    </nav>
+</body>
+</html>

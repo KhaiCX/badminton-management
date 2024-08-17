@@ -1,0 +1,21 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+.sidebar {
+    height: 100vh;
+    background-color: #343a40;
+    padding: 15px;
+}
+.sidebar a {
+    color: white;
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+}
+.sidebar a:hover {
+    background-color: #495057;
+    padding-left: 10px;
+}
+.content {
+    padding: 20px;
+}
