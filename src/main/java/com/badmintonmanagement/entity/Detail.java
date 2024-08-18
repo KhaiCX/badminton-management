@@ -2,8 +2,6 @@ package com.badmintonmanagement.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "details")
 public class Detail {
@@ -11,7 +9,7 @@ public class Detail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detailId;
     private String name;
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String value;
     @ManyToOne
     @JoinColumn(name = "article_id")
