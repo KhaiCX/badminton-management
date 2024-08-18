@@ -8,10 +8,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class BadmintonManagementApplication {
 
     public static void main(String[] args) {
-        try (ConfigurableApplicationContext context =
-                     SpringApplication.run(BadmintonManagementApplication.class, args)) {
-            System.out.println("Run successfully!");
-        }
+        ConfigurableApplicationContext context = SpringApplication.run(BadmintonManagementApplication.class, args);
+        System.out.println(context);
     }
 
 }
