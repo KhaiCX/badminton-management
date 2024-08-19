@@ -25,6 +25,11 @@ public class ArticleClientController {
     @GetMapping()
     public String articles(Model model) {
         List<Article> articles = articleService.getAllArticles();
+        String message = "";
+        if (articles.isEmpty()) {
+            message = "Không có tin tức mới nhất";
+        }
+        model.addAttribute("message", message);
         model.addAttribute("articles", articles);
         return "client/articles";
     }

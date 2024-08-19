@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/client/head :: head('Tin tức')}">
+<head th:replace="~{client/head :: head('Tin tức')}">
     <title></title>
 </head>
 <body>
@@ -8,6 +8,7 @@
 <div class="container mt-4">
     <h1 class="mb-4">Danh Sách Tin Tức</h1>
     <div th:if="${articles != null}" class="row">
+        <h5 class="card-title text-center" th:if="${message != null && message != ''}" th:text="${message}"></h5>
         <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch" th:each="article : ${articles}">
             <div class="card">
                 <img th:if="${article.image != null && article.image != ''}" th:src="@{'/client/images/' + ${article.image}}" src="" class="card-img-top" alt="Article Image">
@@ -23,9 +24,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div th:if="${articles == null || articles.isEmpty()}">
-        <p>Không có tin tức nào để hiển thị.</p>
     </div>
 </div>
 <footer th:replace="~{client/footer :: footer}"></footer>
