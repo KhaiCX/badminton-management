@@ -22,8 +22,8 @@
   <div th:if="${articles != null}" class="row">
     <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch" th:each="article : ${articles}">
       <div class="card">
-        <img th:if="${article.image != null && article.image != ''}" th:src="@{'/client/images/' + ${article.image}}" src="" class="card-img-top" alt="Article Image">
-        <img th:if="${article.image == null || article.image == ''}" th:src="@{/client/images/default_article.png}" src="" class="card-img-top" alt="Article Image">
+        <img th:if="${article.image != null && article.image != ''}" th:src="@{'/client/images/article/' + ${article.image}}" src="" class="card-img-top" alt="Article Image">
+        <img th:if="${article.image == null || article.image == ''}" th:src="@{/client/images/article/default_article.png}" src="" class="card-img-top" alt="Article Image">
         <div class="card-body">
           <h5 class="card-title" th:text="${article.title}">World News</h5>
           <p class="card-text" th:text="${article.description}">Breaking news from around the globe. Stay informed about the latest events

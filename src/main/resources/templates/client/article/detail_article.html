@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/client/head :: head('Chi tiết tin tức')}">
+  <title></title>
+</head>
+<body>
+<nav th:replace="~{client/navbar :: navbar}"></nav>
+
+<div class="container mt-4">
+  <div class="card border-0">
+    <div class="card-body">
+      <h1 class="card-title" th:text="${article.title}">[Tiêu đề bài viết]</h1>
+      <p class="text-muted" th:text="${#temporals.format(article.publishedAt, 'dd/MM/yyyy')}">[Ngày đăng]</p>
+      <th:block th:each="content1 : ${contents1}">
+        <div th:utext="${content1.value}">[Nội dung bài viết]</div>
+        <br>
+      </th:block>
+      <img th:if="${images.size() >= 1}" th:src="@{'/client/images/article/' + ${images[0].value}}"
+           src="" class="card-img-top" alt="Default Article Image">
+      <th:block th:each="content2 : ${contents2}">
+        <div th:utext="${content2.value}">[Nội dung bài viết]</div>
+        <br>
+      </th:block>
+      <img th:if="${images.size() >= 2}"
+           th:src="@{/client/images/article/{fileName}(fileName=${images[1].value})}"
+           src=""
+           class="card-img-top"
+           alt="Default Article Image">
+    </div>
+  </div>
+
+  <a th:href="@{/articles}" class="btn btn-secondary mt-4">Quay lại danh sách tin tức</a>
+</div>
+
+<footer th:replace="~{client/footer :: footer}"></footer>
+</body>
+</html>

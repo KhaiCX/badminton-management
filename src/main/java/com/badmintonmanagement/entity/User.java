@@ -9,22 +9,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     private String fullName;
-    private String prize;
-    private String role;
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    private String image;
 
     public User() {}
-    public User(String fullName, String prize, String role) {
+    public User(String fullName, String image) {
         this.fullName = fullName;
-        this.prize = prize;
-        this.role = role;
+        this.image = image;
     }
 
     public Integer getId() {
@@ -43,11 +33,19 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getPrize() {
-        return prize;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setPrize(String prize) {
-        this.prize = prize;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

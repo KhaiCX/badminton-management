@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{client/head :: head('Thành viên')}">
+    <title></title>
+</head>
+<body>
+<nav th:replace="~{client/navbar :: navbar}"></nav>
+<div class="container mt-4">
+    <h1 class="mb-4">Danh Sách Thành Viên</h1>
+    <div th:if="${users != null}" class="row">
+        <h5 class="card-title text-center" th:if="${message != null && message != ''}" th:text="${message}"></h5>
+        <div class="col-lg-3 col-md-6 mb-3 d-flex align-items-stretch" th:each="user : ${users}">
+            <div class="card">
+                <img th:if="${user.image != null && user.image != ''}" th:src="@{'/client/images/member/' + ${user.image}}" src="" class="responsive-image" alt="User Image">
+                <img th:if="${user.image == null || user.image == ''}" th:src="@{/client/images/member/default_user.jpg}" src="" class="responsive-image" alt="User Image">
+                <div class="card-body" style="text-align: center;">
+                    <strong class="text-center">[[${user.fullName}]]</strong>
+                    <th:block th:each="detail : ${userDetails['detail' + user.userId]}">
+                        <table style="width: 100%;">
+                            <tr>
+                                <th style="width: 50%; text-align: left;">
+                                    <strong th:text="${detail.name}"></strong>
+                                </th>
+                                <td th:text="${detail.value != null && detail.value != '' ? detail.value : 'Chưa có'}" style="width: 50%; text-align: left;">
+                                </td>
+                            </tr>
+                        </table>
+                        <!--<span><strong th:text="${detail.name}"></strong> : [[${detail.value}]]</span> <br>-->
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{client/footer :: footer}"></footer>
+</body>
+</html>

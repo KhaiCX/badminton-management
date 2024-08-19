@@ -2,6 +2,7 @@ package com.badmintonmanagement.service;
 
 import com.badmintonmanagement.entity.Article;
 import com.badmintonmanagement.entity.Detail;
+import com.badmintonmanagement.entity.User;
 import com.badmintonmanagement.repository.DetailRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,8 @@ public class DetailService {
 
     public List<Detail> getAllByArticle(Article article, String name) {
         return detailRepository.findAllByArticleAndName(article, name);
+    }
+    public List<Detail> getAllByUser(User user, String type) {
+        return detailRepository.findAllByUser(user, type);
     }
 }

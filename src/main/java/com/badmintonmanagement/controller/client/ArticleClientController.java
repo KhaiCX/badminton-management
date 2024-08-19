@@ -31,7 +31,7 @@ public class ArticleClientController {
         }
         model.addAttribute("message", message);
         model.addAttribute("articles", articles);
-        return "client/articles";
+        return "client/article/articles";
     }
     @GetMapping("/detail/{articleId}")
     public String detail(@PathVariable Long articleId, Model model) {
@@ -46,7 +46,7 @@ public class ArticleClientController {
             model.addAttribute("contents1", contents1);
             model.addAttribute("contents2", contents2);
             model.addAttribute("images", images);
-            return "client/detail_article";
+            return "client/article/detail_article";
         } catch(ArticleNotFoundException ex) {
             model.addAttribute("message", ex.getMessage());
             return "error/500";

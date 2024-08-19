@@ -1,0 +1,10 @@
+.responsive-image {
+    height: 207px;
+}
+
+/* Height for mobile devices */
+@media only screen and (max-width: 768px) {
+    .responsive-image {
+        height: 400px;
+    }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{client/head :: head('Tin tức')}">
+    <title></title>
+</head>
+<body>
+<nav th:replace="~{client/navbar :: navbar}"></nav>
+<div class="container mt-4">
+    <h1 class="mb-4">Danh Sách Tin Tức</h1>
+    <div th:if="${articles != null}" class="row">
+        <h5 class="card-title text-center" th:if="${message != null && message != ''}" th:text="${message}"></h5>
+        <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch" th:each="article : ${articles}">
+            <div class="card">
+                <img th:if="${article.image != null && article.image != ''}" th:src="@{'/client/images/article/' + ${article.image}}" src="" class="card-img-top" alt="Article Image">
+                <img th:if="${article.image == null || article.image == ''}" th:src="@{/client/images/article/default_article.png}" src="" class="card-img-top" alt="Article Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${article.title}">World News</h5>
+                    <p class="card-text" th:text="${article.description}">Breaking news from around the globe. Stay informed about the latest events
+                        in world politics, economy, and more.</p>
+                    <p class="card-text">
+                        <small class="text-muted" th:text="${#temporals.format(article.publishedAt, 'dd/MM/yyyy')}">[Ngày đăng]</small>
+                    </p>
+                    <a th:href="@{'/articles/detail/' + ${article.id}}" class="btn btn-primary">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{client/footer :: footer}"></footer>
+</body>
+</html>

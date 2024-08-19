@@ -31,8 +31,6 @@ public class UserController {
     }
     @PostMapping("/add-user")
     public String saveUser(User user, RedirectAttributes ra) {
-        user.setPrize(null);
-        user.setRole(MEMBER);
         userService.saveUser(user);
         ra.addFlashAttribute("message", "Add member successfully!");
         return "redirect:/users";
