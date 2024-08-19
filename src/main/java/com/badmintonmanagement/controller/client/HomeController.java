@@ -17,9 +17,11 @@ public class HomeController {
     @GetMapping()
     public String index(Model model) {
         List<Article> articles = articleService.getAllArticles();
+        String message = "";
         if (articles.isEmpty()) {
-            model.addAttribute("message", "Không có tin tức mới nhất");
+            message = "Không có tin tức mới nhất";
         }
+        model.addAttribute("message", message);
         model.addAttribute("articles", articles);
         return "client/index";
     }
