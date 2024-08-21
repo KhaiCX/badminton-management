@@ -32,7 +32,7 @@ public class UserClientController {
         }
         Map<String, List<Detail>> userDetailMap = new HashMap<>();
         for (User user : users) {
-            List<Detail> details = detailService.getAllByUser(user, Const.MEMBER);
+            List<Detail> details = detailService.getAllByUser(user, Const.TYPE_MEMBER);
             userDetailMap.put("detail" + user.getUserId(), details);
             model.addAttribute("userDetails", userDetailMap);
         }

@@ -2,7 +2,8 @@ body {
     font-family: 'Arial', sans-serif;
 }
 .sidebar {
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     background-color: #343a40;
     padding: 15px;
 }

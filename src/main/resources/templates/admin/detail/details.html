@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/head :: head('Member Management')}">
+    <title></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav th:replace="~{admin/navbar :: navbar}"></nav>
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 content">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">[[${user.fullName}]]</h1>
+            </div>
+            <div th:if="${message != ''}" class="alert alert-success text-center">
+                [[${message}]]
+            </div>
+            <!-- User Table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="detail : ${details}">
+                        <td th:text="${detail.detailId}"></td>
+                        <td th:text="${detail.name}"></td>
+                        <td th:text="${detail.value != null && detail.value != '' ? detail.value : 'Chưa có'}"></td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/detail/' + ${user.userId} + '/update/' + ${detail.detailId}}">Update</a>
+                            <a class="btn btn-danger btn-sm disabled">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Add New Detail Button -->
+            <div>
+                <button class="btn btn-success disabled">Add New Detail</button>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

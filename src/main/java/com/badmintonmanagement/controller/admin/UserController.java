@@ -11,18 +11,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/admin")
 public class UserController {
-    private static final String MEMBER = "Member";
     private final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping()
+    @GetMapping("/users")
     public String getAllUsers(Model model) {
         List<User> users = userService.getAllUsers();
+        String message = "";
+        if (users.isEmpty()) {
+            message = "Không có người dùng nào";
+        }
+        model.addAttribute("message", message);
         model.addAttribute("users", users);
-        return "admin/users";
+        return "admin/user/users";
     }
     @GetMapping("/add-user")
     public String addNewUser(Model model) {

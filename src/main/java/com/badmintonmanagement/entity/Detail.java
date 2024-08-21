@@ -34,14 +34,6 @@ public class Detail {
     }
     public Detail() {}
 
-    public Long getId() {
-        return detailId;
-    }
-
-    public void setId(Long detailId) {
-        this.detailId = detailId;
-    }
-
     public String getName() {
         return name;
     }
