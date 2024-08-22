@@ -61,7 +61,8 @@ public class DetailController {
     public String updateDetail(Detail detail, RedirectAttributes ra) {
         detail.setType(Const.TYPE_MEMBER);
         detailService.save(detail);
-        ra.addFlashAttribute("message", "Update detail member successfully!!");
+        String success = "Update detail member successfully!!";
+        ra.addFlashAttribute("success", success);
         return "redirect:/admin/detail/" + detail.getUser().getUserId();
     }
 }

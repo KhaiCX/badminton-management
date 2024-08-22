@@ -14,8 +14,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">[[${user.fullName}]]</h1>
             </div>
-            <div th:if="${message != ''}" class="alert alert-success text-center">
-                [[${message}]]
+            <div th:if="${success != null}" class="alert alert-success text-center" th:text="${success}">
             </div>
             <!-- User Table -->
             <div class="table-responsive">
