@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-    <nav class="col-md-2 d-none d-md-block sidebar" th:fragment="navbar">
-        <div class="sidebar-sticky">
-            <h4 class="text-white">Dashboard</h4>
-            <a th:href="@{/admin}">Overview</a>
-            <a th:href="@{/admin}">Articles</a>
-            <a th:href="@{/admin}">Analytics</a>
-            <a th:href="@{/admin/users}">Users</a>
-            <a th:href="@{/admin}">Settings</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <!-- Nút toggle cho mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin"
+                aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar content -->
+        <div class="collapse navbar-collapse" id="navbarAdmin">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/admin}">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/articles}">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/analytics}">Analytics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/users}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/settings}">Settings</a>
+                </li>
+            </ul>
+            <!-- Thêm mục logout ở bên phải -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 </body>
 </html>
