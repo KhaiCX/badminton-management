@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -27,7 +28,7 @@ public class WebSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		 http
          .authorizeHttpRequests((auth) -> auth
-				 .requestMatchers("/", "/articles/**", "/members/**", "/schedules/**", "/login").permitAll()
+				 .requestMatchers("/", "/articles/**", "/members/**", "/schedules/**", "/login", "/logout").permitAll()
 				 .requestMatchers("/admin/**").hasAuthority("admin")
          ).formLogin(form -> form.loginPage("/login")
 						 .loginProcessingUrl("/login")
@@ -36,9 +37,10 @@ public class WebSecurityConfig {
 						 .permitAll())
 				 .logout((logout -> logout
 						 .logoutUrl("/logout")
-						 .logoutSuccessUrl("/")
+						 .logoutSuccessUrl("/login?logout")
 						 .invalidateHttpSession(true)
 						 .deleteCookies("JSESSIONID")
+						 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
 						 .permitAll()))
 				 .userDetailsService(badmintonUserDetailsService());
 		 return http.build();
