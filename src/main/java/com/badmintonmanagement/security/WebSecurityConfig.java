@@ -27,25 +27,24 @@ public class WebSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		 http
          .authorizeHttpRequests((auth) -> auth
-				 .requestMatchers("/", "/articles/**", "/members/**", "/schedules/**").permitAll()
-				 .requestMatchers("/admin/**").authenticated()
+				 .requestMatchers("/", "/articles/**", "/members/**", "/schedules/**", "/login").permitAll()
+				 .requestMatchers("/admin/**").hasAuthority("admin")
          ).formLogin(form -> form.loginPage("/login")
 						 .loginProcessingUrl("/login")
 						 .usernameParameter("account")
-						 .defaultSuccessUrl("/admin", true)
+								 .defaultSuccessUrl("/admin", true)
 						 .permitAll())
 				 .logout((logout -> logout
 						 .logoutUrl("/logout")
-						 .logoutSuccessUrl("/login?logout")
+						 .logoutSuccessUrl("/")
 						 .invalidateHttpSession(true)
 						 .deleteCookies("JSESSIONID")
-						 .permitAll())
-         )
+						 .permitAll()))
 				 .userDetailsService(badmintonUserDetailsService());
 		 return http.build();
 	}
 	@Bean
 	WebSecurityCustomizer configureWebSecurity() {
-		return (web) -> web.ignoring().requestMatchers("/admin/**", "/client/**", "/webjars/**");
+		return (web) -> web.ignoring().requestMatchers("/client/**", "/webjars/**");
 	}
 }
