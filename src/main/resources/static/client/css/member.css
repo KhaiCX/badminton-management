@@ -1,6 +1,30 @@
 .responsive-image {
     height: 207px;
 }
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px; /* Chiều cao tối thiểu cho thẻ card */
+    margin: 10px; /* Khoảng cách giữa các thẻ card */
+}
+
+.card img {
+    height: auto; /* Đảm bảo hình ảnh có chiều cao cố định */
+    object-fit: cover; /* Giữ hình ảnh đẹp trong khung */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.card .text-center {
+    margin-top: auto;
+}
 
 /* Height for mobile devices */
 @media only screen and (max-width: 768px) {

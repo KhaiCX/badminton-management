@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{client/head :: head('Thành viên')}">
+<head th:insert="~{client/head :: head('Thành viên')}">
     <title></title>
 </head>
 <body>
 <nav th:replace="~{client/navbar :: navbar}"></nav>
 <div class="container mt-4">
     <h1 class="mb-4">Danh Sách Thành Viên</h1>
-    <div th:if="${users != null}" class="row">
-        <h5 class="card-title text-center" th:if="${message != null && message != ''}" th:text="${message}"></h5>
-        <div class="col-lg-3 col-md-6 mb-3 d-flex align-items-stretch" th:each="user : ${users}">
-            <div class="card">
+    <div th:if="${users != null}" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <h5 class="card-title text-center col-12" th:if="${notice != null && notice != ''}" th:text="${notice}"></h5>
+        <div class="col" th:each="user : ${users}">
+            <div class="card h-100">
                 <img th:if="${user.image != null && user.image != ''}" th:src="@{'/client/images/member/' + ${user.image}}" src="" class="responsive-image" alt="User Image">
                 <img th:if="${user.image == null || user.image == ''}" th:src="@{/client/images/member/default_user.jpg}" src="" class="responsive-image" alt="User Image">
-                <div class="card-body" style="text-align: center;">
-                    <strong class="text-center">[[${user.fullName}]]</strong>
-                    <th:block th:each="detail : ${userDetails['detail' + user.userId]}">
-                        <table style="width: 100%;">
-                            <tr>
-                                <th style="width: 50%; text-align: left;">
-                                    <strong th:text="${detail.name}"></strong>
-                                </th>
-                                <td th:text="${detail.value != null && detail.value != '' ? detail.value : 'Chưa có'}" style="width: 50%; text-align: left;">
-                                </td>
-                            </tr>
-                        </table>
-                        <!--<span><strong th:text="${detail.name}"></strong> : [[${detail.value}]]</span> <br>-->
-                    </th:block>
+                <div class="card-body d-flex flex-column" style="text-align: center;">
+                    <strong class="text-center mb-3">[[${user.fullName}]]</strong>
+                    <div class="flex-grow-1">
+                        <th:block th:each="detail : ${userDetails['detail' + user.userId]}">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th style="width: 50%; text-align: left;">
+                                        <strong th:text="${detail.name}"></strong>
+                                    </th>
+                                    <td th:text="${detail.value != null && detail.value != '' ? detail.value : 'Chưa có'}" style="width: 50%; text-align: left;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </th:block>
+                    </div>
                 </div>
             </div>
         </div>
