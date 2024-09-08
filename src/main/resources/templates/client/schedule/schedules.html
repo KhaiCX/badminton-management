@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{client/head :: head('Lịch thi đấu')}">
+    <title></title>
+</head>
+<body>
+<nav th:replace="~{client/navbar :: navbar}"></nav>
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Lịch thi đấu</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Match 1 -->
+            <div class="match-card d-flex justify-content-between align-items-center">
+                <div class="team d-flex align-items-center">
+                    <h4 class="ms-2">Cao Xuân Khải</h4>
+                </div>
+                <div class="h4 vs-logo">Vs</div>
+                <div class="team d-flex align-items-center">
+                    <h4 class="me-2">Cao Xuân Nam</h4>
+                </div>
+                <div class="match-info text-center">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{client/footer :: footer}"></footer>
+</body>
+</html>
