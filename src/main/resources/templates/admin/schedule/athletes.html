@@ -49,9 +49,10 @@
             </div>
             <!-- Add New Athlete Button -->
             <div>
-                <button class="btn btn-success disabled">Add New Athlete</button>
+                <a class="btn btn-success" th:href="@{'/admin/schedules/' + ${competitionTable.competitionTableId} + '/athlete/new'}">Add New Athlete</a>
             </div>
         </main>
+
     </div>
 </div>
 </body>
