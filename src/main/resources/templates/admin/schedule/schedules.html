@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{admin/head :: head('Member Management')}">
+<head th:replace="~{admin/head :: head('Schedules Management')}">
     <title></title>
 </head>
 <body>
@@ -27,9 +27,9 @@
                     <tbody>
                     <tr th:each="competitionTable : ${competitionTables}">
                         <td th:text="${competitionTable.competitionTableId}"></td>
-                        <td id="fullName" th:text="${competitionTable.name}"></td>
+                        <td id="name" th:text="${competitionTable.name}"></td>
                         <td>
-                            <a class="btn btn-primary btn-sm">Detail</a>
+                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/schedules/' + ${competitionTable.competitionTableId}}">Detail</a>
                             <a class="btn btn-danger btn-sm disabled">Delete</a>
                         </td>
                     </tr>

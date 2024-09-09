@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/head :: head('Athletes Management')}">
+    <title></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav th:replace="~{admin/navbar :: navbar}"></nav>
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 content">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Competition table: [[${competitionTable.name}]]</h1>
+            </div>
+            <div th:if="${success != null}" class="alert alert-success text-center" th:text="${success}">
+            </div>
+            <!-- Athlete Table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <p class="text-center h5" th:if="${message != null}" th:text="${message}"></p>
+                    <thead th:if="${message == null}">
+                    <tr>
+                        <th>ID</th>
+                        <th>Athlete</th>
+                        <th>Number of wins</th>
+                        <th>Number of losses</th>
+                        <th>Number of draws</th>
+                        <th>Point</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="athlete : ${athletes}">
+                        <td th:text="${athlete.athleteId}"></td>
+                        <td th:text="${athlete.athlete}"></td>
+                        <td th:text="${athlete.numberOfWins}"></td>
+                        <td th:text="${athlete.numberOfLosses}"></td>
+                        <td th:text="${athlete.numberOfDraws}"></td>
+                        <td th:text="${athlete.point}"></td>
+                        <td>
+                            <a class="btn btn-primary btn-sm">Update</a>
+                            <a class="btn btn-danger btn-sm disabled">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Add New Athlete Button -->
+            <div>
+                <button class="btn btn-success disabled">Add New Athlete</button>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

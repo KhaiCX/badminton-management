@@ -33,7 +33,7 @@ public class DetailController {
             String message = "";
             List<Detail> details = detailService.getAllByUser(user, Const.TYPE_MEMBER);
             if (details.isEmpty()) {
-                message = "Không có thông tin nào";
+                message = "No information available";
             }
             model.addAttribute("message", message);
             model.addAttribute("user", user);
