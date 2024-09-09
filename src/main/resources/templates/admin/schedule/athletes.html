@@ -20,13 +20,12 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <p class="text-center h5" th:if="${message != null}" th:text="${message}"></p>
-                    <thead th:if="${message == null}">
+                    <thead th:if="${message == null || message == ''}">
                     <tr>
                         <th>ID</th>
                         <th>Athlete</th>
                         <th>Number of wins</th>
                         <th>Number of losses</th>
-                        <th>Number of draws</th>
                         <th>Point</th>
                         <th></th>
                     </tr>
@@ -37,10 +36,9 @@
                         <td th:text="${athlete.user.fullName}"></td>
                         <td th:text="${athlete.numberOfWins}"></td>
                         <td th:text="${athlete.numberOfLosses}"></td>
-                        <td th:text="${athlete.numberOfDraws}"></td>
                         <td th:text="${athlete.point}"></td>
                         <td>
-                            <a class="btn btn-primary btn-sm">Update</a>
+                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/schedules/' + ${competitionTable.competitionTableId} + '/athletes/' + ${athlete.athleteId}}">Update</a>
                             <a class="btn btn-danger btn-sm disabled">Delete</a>
                         </td>
                     </tr>
@@ -49,7 +47,7 @@
             </div>
             <!-- Add New Athlete Button -->
             <div>
-                <a class="btn btn-success" th:href="@{'/admin/schedules/' + ${competitionTable.competitionTableId} + '/athlete/new'}">Add New Athlete</a>
+                <a class="btn btn-success" th:href="@{'/admin/schedules/' + ${competitionTable.competitionTableId} + '/athletes/new'}">Add New Athlete</a>
             </div>
         </main>
 

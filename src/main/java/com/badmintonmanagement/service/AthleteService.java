@@ -2,10 +2,12 @@ package com.badmintonmanagement.service;
 
 import com.badmintonmanagement.entity.Athlete;
 import com.badmintonmanagement.entity.CompetitionTable;
+import com.badmintonmanagement.exception.AthleteNotFoundException;
 import com.badmintonmanagement.repository.AthleteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AthleteService {
@@ -19,5 +21,15 @@ public class AthleteService {
 
     public void save(Athlete athlete) {
         athleteRepository.save(athlete);
+    }
+
+    public Athlete getAthletesById(Integer athleteId) throws AthleteNotFoundException {
+        Optional<Athlete> athlete = athleteRepository.findById(athleteId);
+        if (athlete.isPresent()) {
+            return athlete.get();
+        }
+        else {
+            throw new AthleteNotFoundException("Không tìm thấy vận động viên");
+        }
     }
 }

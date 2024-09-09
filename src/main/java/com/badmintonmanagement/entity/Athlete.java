@@ -10,7 +10,6 @@ public class Athlete {
     private String athlete;
     private Integer numberOfWins;
     private Integer numberOfLosses;
-    private Integer numberOfDraws;
     private Integer point;
     @ManyToOne
     @JoinColumn(name = "competition_table_id")
@@ -52,13 +51,6 @@ public class Athlete {
         this.numberOfLosses = numberOfLosses;
     }
 
-    public Integer getNumberOfDraws() {
-        return numberOfDraws;
-    }
-
-    public void setNumberOfDraws(Integer numberOfDraws) {
-        this.numberOfDraws = numberOfDraws;
-    }
     public Integer getPoint() {
         return point;
     }
