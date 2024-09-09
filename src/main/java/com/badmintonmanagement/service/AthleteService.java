@@ -6,8 +6,10 @@ import com.badmintonmanagement.exception.AthleteNotFoundException;
 import com.badmintonmanagement.repository.AthleteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AthleteService {
@@ -16,7 +18,8 @@ public class AthleteService {
         this.athleteRepository = athleteRepository;
     }
     public List<Athlete> getAthletesByCompetitionTable(CompetitionTable competitionTable) {
-        return athleteRepository.findAthletesByCompetitionTable(competitionTable);
+        List<Athlete> athletes = athleteRepository.findAthletesByCompetitionTable(competitionTable);
+        return athletes.stream().sorted(Comparator.comparing(Athlete:: getPoint).reversed()).collect(Collectors.toList());
     }
 
     public void save(Athlete athlete) {
