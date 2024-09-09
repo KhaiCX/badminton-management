@@ -16,4 +16,8 @@ public class AthleteService {
     public List<Athlete> getAthletesByCompetitionTable(CompetitionTable competitionTable) {
         return athleteRepository.findAthletesByCompetitionTable(competitionTable);
     }
+
+    public void save(Athlete athlete) {
+        athleteRepository.save(athlete);
+    }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/head :: head('Add New Athlete')}">
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-5">Add New Athlete</h2>
+
+    <!-- Form thêm mới người dùng -->
+    <form th:action="@{/admin/schedules/save}" th:object="${athlete}" method="post">
+        <input type="hidden" th:field="${athlete.athleteId}" />
+        <input type="hidden" th:field="${athlete.competitionTable.competitionTableId}" />
+        <input type="hidden" th:field="${athlete.competitionTable.name}" />
+        <div class="mb-3">
+            <label for="category">Select Member: </label>
+            <select id="category" name="category" th:field="${athlete.user}">
+                <option value="" disabled>Select Member: </option>
+                <option th:each="user : ${users}"
+                        th:value="${user.userId}"
+                        th:text="${user.fullName}"
+                        >
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Athlete</button>
+    </form>
+
+    <!-- Back to user list -->
+    <div class="mt-3">
+        <a href="/users" class="btn btn-secondary">Back to User List</a>
+    </div>
+</div>
+</body>
+</html>
