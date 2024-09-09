@@ -31,3 +31,28 @@
     font-weight: bold;
     color: #666;
 }
+.table-custom thead th {
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+}
+.table-custom tbody tr:nth-child(1) td {
+    background-color: #f8d7da;
+}
+.table-custom tbody tr:nth-child(2) td {
+    background-color: #fff3cd;
+}
+.table-custom tbody tr:nth-child(3) td {
+    background-color: #d4edda;
+}
+.table-custom tbody tr:nth-child(4) td {
+    background-color: #d1ecf1;
+}
+.bold {
+    font-weight: bold;
+    color: red;
+}
+.team-logo {
+    width: 30px;
+    height: 30px;
+}

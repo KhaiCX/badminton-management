@@ -3,6 +3,7 @@ package com.badmintonmanagement.controller.admin;
 import com.badmintonmanagement.entity.Athlete;
 import com.badmintonmanagement.entity.CompetitionTable;
 import com.badmintonmanagement.entity.User;
+import com.badmintonmanagement.exception.AthleteNotFoundException;
 import com.badmintonmanagement.exception.CompetitionTableNotFoundException;
 import com.badmintonmanagement.exception.UserNotFoundException;
 import com.badmintonmanagement.service.AthleteService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/admin")
@@ -49,7 +51,7 @@ public class ScheduleController {
             throw new CompetitionTableNotFoundException(ex.getMessage());
         }
     }
-    @GetMapping("/schedules/{competitionTableId}/athlete/new")
+    @GetMapping("/schedules/{competitionTableId}/athletes/new")
     public String newAthlete(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException, UserNotFoundException {
         try {
             CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
@@ -67,8 +69,30 @@ public class ScheduleController {
             throw new UserNotFoundException(ex.getMessage());
         }
     }
+    @GetMapping("/schedules/{competitionTableId}/athletes/{athleteId}")
+    public String updateAthlete(@PathVariable Integer competitionTableId, @PathVariable Integer athleteId, Model model) throws AthleteNotFoundException, CompetitionTableNotFoundException {
+        try {
+            CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
+            List<User> users = userService.getAllUsers();
+            Athlete athlete = athleteService.getAthletesById(athleteId);
+            User user = athlete.getUser();
+            athlete.setCompetitionTable(competitionTable);
+            model.addAttribute("users", users);
+            model.addAttribute("user", user);
+            model.addAttribute("athlete", athlete);
+            return "admin/schedule/add_athlete";
+        } catch (AthleteNotFoundException ex) {
+            throw new AthleteNotFoundException(ex.getMessage());
+        } catch (CompetitionTableNotFoundException ex) {
+            throw new CompetitionTableNotFoundException(ex.getMessage());
+        }
+    }
     @PostMapping("/schedules/save")
     public String savedAthlete(Athlete athlete, RedirectAttributes ra) {
+        athlete.setNumberOfWins(Objects.isNull(athlete.getNumberOfWins()) || Objects.equals(athlete.getNumberOfWins(), 0) ? 0 : athlete.getNumberOfWins());
+        athlete.setNumberOfLosses(Objects.isNull(athlete.getNumberOfLosses()) || Objects.equals(athlete.getNumberOfLosses(), 0) ? 0 : athlete.getNumberOfLosses());
+        athlete.setPoint(Objects.isNull(athlete.getPoint()) || Objects.equals(athlete.getPoint(), 0) ? 0 : athlete.getPoint());
+        //if (Objects.isNull(athlete.getNumberOfWins()) && Objects.equals(athlete.getNumberOfWins(), 0))
         athleteService.save(athlete);
         String success;
         if (athlete.getAthleteId() != null) {
