@@ -15,6 +15,9 @@ public class Athlete {
     @ManyToOne
     @JoinColumn(name = "competition_table_id")
     private CompetitionTable competitionTable;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     public Athlete() {}
 
     public Integer getAthleteId() {
@@ -61,5 +64,19 @@ public class Athlete {
     }
     public void setPoint(Integer point) {
         this.point = point;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public CompetitionTable getCompetitionTable() {
+        return competitionTable;
+    }
+
+    public void setCompetitionTable(CompetitionTable competitionTable) {
+        this.competitionTable = competitionTable;
     }
 }

@@ -6,17 +6,18 @@
 <body>
 <div class="container">
     <h1 class="mt-5 text-center">Update Detail Member</h1>
-    <form th:action="@{/admin/update_detail}" th:object="${detail}" method="post">
-        <input type="hidden" th:field="${detail.detailId}" />
-        <input type="hidden" th:field="${detail.user.userId}" />
-        <input type="hidden" th:field="${detail.name}" />
-        <div class="mb-3">
-            <label for="name" class="form-label">[[${detail.name}]]</label>
-            <input type="text" class="form-control" id="name" th:field="${detail.value}" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-
+    <div class="d-flex justify-content-center">
+        <form th:action="@{/admin/update_detail}" th:object="${detail}" method="post">
+            <input type="hidden" th:field="${detail.detailId}" />
+            <input type="hidden" th:field="${detail.user.userId}" />
+            <input type="hidden" th:field="${detail.name}" />
+            <div class="mb-3">
+                <label for="name" class="form-label">[[${detail.name}]]</label>
+                <input type="text" class="form-control" id="name" th:field="${detail.value}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
