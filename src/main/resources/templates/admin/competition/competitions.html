@@ -29,7 +29,7 @@
                         <td th:text="${competitionTable.competitionTableId}"></td>
                         <td id="name" th:text="${competitionTable.name}"></td>
                         <td>
-                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/schedules/' + ${competitionTable.competitionTableId}}">Detail</a>
+                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/competitionTables/' + ${competitionTable.competitionTableId}}">Detail</a>
                             <a class="btn btn-danger btn-sm disabled">Delete</a>
                         </td>
                     </tr>
@@ -38,7 +38,7 @@
             </div>
             <!-- Add New Competition Table Button -->
             <div>
-                <button class="btn btn-success disabled" onclick="window.location.href='/users/add-user'">Add New Competition Table</button>
+                <button class="btn btn-success disabled">Add New Competition Table</button>
             </div>
         </main>
     </div>

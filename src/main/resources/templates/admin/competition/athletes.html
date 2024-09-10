@@ -38,7 +38,7 @@
                         <td th:text="${athlete.numberOfLosses}"></td>
                         <td th:text="${athlete.point}"></td>
                         <td>
-                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/schedules/' + ${competitionTable.competitionTableId} + '/athletes/' + ${athlete.athleteId}}">Update</a>
+                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/competitionTables/' + ${competitionTable.competitionTableId} + '/athletes/' + ${athlete.athleteId}}">Update</a>
                             <a class="btn btn-danger btn-sm disabled">Delete</a>
                         </td>
                     </tr>

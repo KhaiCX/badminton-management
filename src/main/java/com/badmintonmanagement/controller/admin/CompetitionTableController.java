@@ -19,22 +19,22 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/admin")
-public class ScheduleController {
+public class CompetitionTableController {
     private final CompetitionTableService competitionTableService;
     private final AthleteService athleteService;
     private final UserService userService;
-    public ScheduleController(CompetitionTableService competitionTableService, AthleteService athleteService, UserService userService) {
+    public CompetitionTableController(CompetitionTableService competitionTableService, AthleteService athleteService, UserService userService) {
         this.competitionTableService = competitionTableService;
         this.athleteService = athleteService;
         this.userService = userService;
     }
-    @GetMapping("/schedules")
+    @GetMapping("/competitionTables")
     public String getAllCompetitionTables(Model model) {
         List<CompetitionTable> competitionTableList = competitionTableService.getAll();
         model.addAttribute("competitionTables", competitionTableList);
-        return "admin/schedule/schedules";
+        return "admin/competition/competitions";
     }
-    @GetMapping("/schedules/{competitionTableId}")
+    @GetMapping("/competitionTables/{competitionTableId}")
     public String getAllAthletes(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException {
         try {
             CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
@@ -46,30 +46,26 @@ public class ScheduleController {
             model.addAttribute("message", message);
             model.addAttribute("competitionTable", competitionTable);
             model.addAttribute("athletes", athletes);
-            return "admin/schedule/athletes";
+            return "admin/competition/athletes";
         } catch (CompetitionTableNotFoundException ex) {
             throw new CompetitionTableNotFoundException(ex.getMessage());
         }
     }
-    @GetMapping("/schedules/{competitionTableId}/athletes/new")
-    public String newAthlete(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException, UserNotFoundException {
+    @GetMapping("/competitionTables/{competitionTableId}/athletes/new")
+    public String newAthlete(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException {
         try {
             CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
             List<User> users = userService.getAllUsers();
-            User user = userService.getUserById(users.get(0).getUserId());
             Athlete athlete = new Athlete();
             athlete.setCompetitionTable(competitionTable);
             model.addAttribute("users", users);
-            model.addAttribute("user", user);
             model.addAttribute("athlete", athlete);
-            return "admin/schedule/add_athlete";
+            return "admin/competition/add_athlete";
         } catch (CompetitionTableNotFoundException ex) {
             throw new CompetitionTableNotFoundException(ex.getMessage());
-        } catch (UserNotFoundException ex) {
-            throw new UserNotFoundException(ex.getMessage());
         }
     }
-    @GetMapping("/schedules/{competitionTableId}/athletes/{athleteId}")
+    @GetMapping("/competitionTables/{competitionTableId}/athletes/{athleteId}")
     public String updateAthlete(@PathVariable Integer competitionTableId, @PathVariable Integer athleteId, Model model) throws AthleteNotFoundException, CompetitionTableNotFoundException {
         try {
             CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
@@ -80,14 +76,14 @@ public class ScheduleController {
             model.addAttribute("users", users);
             model.addAttribute("user", user);
             model.addAttribute("athlete", athlete);
-            return "admin/schedule/add_athlete";
+            return "admin/competition/add_athlete";
         } catch (AthleteNotFoundException ex) {
             throw new AthleteNotFoundException(ex.getMessage());
         } catch (CompetitionTableNotFoundException ex) {
             throw new CompetitionTableNotFoundException(ex.getMessage());
         }
     }
-    @PostMapping("/schedules/save")
+    @PostMapping("/competitionTables/save")
     public String savedAthlete(Athlete athlete, RedirectAttributes ra) {
         athlete.setNumberOfWins(Objects.isNull(athlete.getNumberOfWins()) || Objects.equals(athlete.getNumberOfWins(), 0) ? 0 : athlete.getNumberOfWins());
         athlete.setNumberOfLosses(Objects.isNull(athlete.getNumberOfLosses()) || Objects.equals(athlete.getNumberOfLosses(), 0) ? 0 : athlete.getNumberOfLosses());
