@@ -1,8 +1,17 @@
 package com.badmintonmanagement.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Table(name = "athletes")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Athlete {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,58 +26,4 @@ public class Athlete {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-    public Athlete() {}
-
-    public Integer getAthleteId() {
-        return athleteId;
-    }
-
-    public void setAthleteId(Integer athleteId) {
-        this.athleteId = athleteId;
-    }
-
-    public String getAthlete() {
-        return athlete;
-    }
-
-    public void setAthlete(String athlete) {
-        this.athlete = athlete;
-    }
-
-    public Integer getNumberOfWins() {
-        return numberOfWins;
-    }
-
-    public void setNumberOfWins(Integer numberOfWins) {
-        this.numberOfWins = numberOfWins;
-    }
-
-    public Integer getNumberOfLosses() {
-        return numberOfLosses;
-    }
-
-    public void setNumberOfLosses(Integer numberOfLosses) {
-        this.numberOfLosses = numberOfLosses;
-    }
-
-    public Integer getPoint() {
-        return point;
-    }
-    public void setPoint(Integer point) {
-        this.point = point;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public CompetitionTable getCompetitionTable() {
-        return competitionTable;
-    }
-
-    public void setCompetitionTable(CompetitionTable competitionTable) {
-        this.competitionTable = competitionTable;
-    }
 }
