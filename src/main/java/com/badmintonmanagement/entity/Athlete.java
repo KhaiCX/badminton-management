@@ -16,7 +16,6 @@ public class Athlete {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer athleteId;
-    private String athlete;
     private Integer numberOfWins;
     private Integer numberOfLosses;
     private Integer point;
