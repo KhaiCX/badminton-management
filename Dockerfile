@@ -1,6 +1,3 @@
-FROM maven:3.9.4-openjdk-17 AS builder
-COPY ./src src/
-COPY ./pom.xml pom.xml
 RUN mvn clean package -DskipTestsgit add Dockerfile
 
 FROM openjdk:17-jdk-alpine
