@@ -1,8 +1,6 @@
 package com.badmintonmanagement.controller.admin;
 
-import com.badmintonmanagement.entity.CompetitionTable;
 import com.badmintonmanagement.entity.Tournament;
-import com.badmintonmanagement.service.CompetitionTableService;
 import com.badmintonmanagement.service.TournamentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +16,10 @@ import java.util.List;
 @RequestMapping("/admin")
 public class TournamentController {
     private final TournamentService tournamentService;
-    private final CompetitionTableService competitionTableService;
-    public TournamentController(TournamentService tournamentService, CompetitionTableService competitionTableService) {
+    //private final CompetitionTableService competitionTableService;
+    public TournamentController(TournamentService tournamentService) {
         this.tournamentService = tournamentService;
-        this.competitionTableService = competitionTableService;
+        //this.competitionTableService = competitionTableService;
     }
     @GetMapping("/tournaments")
     public String getAllTournaments(Model model) {
@@ -53,11 +51,11 @@ public class TournamentController {
         ra.addFlashAttribute("success", success);
         return "redirect:/admin/tournaments";
     }
-    @GetMapping("/tournaments/{tournamentId}/competitionTables")
+/*    @GetMapping("/tournaments/{tournamentId}/competitionTables")
     public String getCompetitionTablesByTournament(@PathVariable Integer tournamentId, Model model) {
         List<CompetitionTable> competitionTables = competitionTableService.getCompetitionTableByTournamentId(tournamentId);
         return "admin/competitionTable/competitionTables";
-    }
+    }*/
     @GetMapping("/tournaments/update/{tournamentId}")
     public String updateTournament(@PathVariable Integer tournamentId, Model model) {
         Tournament tournament = tournamentService.getById(tournamentId);
