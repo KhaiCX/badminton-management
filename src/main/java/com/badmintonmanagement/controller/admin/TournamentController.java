@@ -1,6 +1,8 @@
 package com.badmintonmanagement.controller.admin;
 
+import com.badmintonmanagement.entity.CompetitionTable;
 import com.badmintonmanagement.entity.Tournament;
+import com.badmintonmanagement.service.CompetitionTableService;
 import com.badmintonmanagement.service.TournamentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,10 @@ import java.util.List;
 @RequestMapping("/admin")
 public class TournamentController {
     private final TournamentService tournamentService;
-    //private final CompetitionTableService competitionTableService;
-    public TournamentController(TournamentService tournamentService) {
+    private final CompetitionTableService competitionTableService;
+    public TournamentController(TournamentService tournamentService, CompetitionTableService competitionTableService) {
         this.tournamentService = tournamentService;
-        //this.competitionTableService = competitionTableService;
+        this.competitionTableService = competitionTableService;
     }
     @GetMapping("/tournaments")
     public String getAllTournaments(Model model) {
@@ -51,11 +53,6 @@ public class TournamentController {
         ra.addFlashAttribute("success", success);
         return "redirect:/admin/tournaments";
     }
-/*    @GetMapping("/tournaments/{tournamentId}/competitionTables")
-    public String getCompetitionTablesByTournament(@PathVariable Integer tournamentId, Model model) {
-        List<CompetitionTable> competitionTables = competitionTableService.getCompetitionTableByTournamentId(tournamentId);
-        return "admin/competitionTable/competitionTables";
-    }*/
     @GetMapping("/tournaments/update/{tournamentId}")
     public String updateTournament(@PathVariable Integer tournamentId, Model model) {
         Tournament tournament = tournamentService.getById(tournamentId);
@@ -69,6 +66,22 @@ public class TournamentController {
         tournamentService.delete(tournamentId);
         ra.addFlashAttribute("success", "Delete Tournament: " + name + " successfully!!");
         return "redirect:/admin/tournaments";
+    }
+    @GetMapping("/tournaments/{tournamentId}/competitionTables")
+    public String getCompetitionTablesByTournament(@PathVariable Integer tournamentId, Model model) {
+        List<CompetitionTable> competitionTables = competitionTableService.getCompetitionTableByTournamentId(tournamentId);
+        Tournament tournament = tournamentService.getById(tournamentId);
+        String message;
+        if (competitionTables.isEmpty()) {
+            message = "No data available";
+            model.addAttribute("message", message);
+        }
+        else {
+            model.addAttribute("competitionTables", competitionTables);
+        }
+        model.addAttribute("tournamentId", tournamentId);
+        model.addAttribute("title", "Manage competition tables in the tournament: " + tournament.getName());
+        return "admin/competition/competitions";
     }
 //    @GetMapping("/competitionTables/{competitionTableId}")
 //    public String getAllAthletes(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException {

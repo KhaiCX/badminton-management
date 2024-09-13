@@ -28,12 +28,6 @@ public class CompetitionTableController {
         this.athleteService = athleteService;
         this.userService = userService;
     }
-    @GetMapping("/competitionTables")
-    public String getAllCompetitionTables(Model model) {
-        List<CompetitionTable> competitionTableList = competitionTableService.getAll();
-        model.addAttribute("competitionTables", competitionTableList);
-        return "admin/competition/competitions";
-    }
     @GetMapping("/competitionTables/{competitionTableId}")
     public String getAllAthletes(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException {
         try {
