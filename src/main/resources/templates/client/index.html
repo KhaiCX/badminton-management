@@ -31,7 +31,7 @@
           <p class="card-text">
             <small class="text-muted" th:text="${#temporals.format(article.publishedAt, 'dd/MM/yyyy')}">[Ngày đăng]</small>
           </p>
-          <a th:href="@{'/articles/detail/' + ${article.id}}" class="btn btn-primary">Xem chi tiết</a>
+          <a th:href="@{'/articles/detail/' + ${articleId}}" class="btn btn-primary">Xem chi tiết</a>
         </div>
       </div>
     </div>
