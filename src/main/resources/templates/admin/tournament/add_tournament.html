@@ -5,16 +5,16 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-5">Add New Tournament</h2>
+    <h2 class="mt-5" th:text="${title}"></h2>
 
     <!-- Form thêm mới người dùng -->
     <form th:action="@{/admin/tournaments/save}" th:object="${tournament}" method="post">
         <input type="hidden" th:field="${tournament.tournamentId}" />
         <div class="mb-3">
-            <label for="name" class="form-label">[[${detail.name}]]</label>
-            <input type="text" class="form-control" id="name" th:field="${detail.value}" required>
+            <label for="name" class="form-label">Tournament name:</label>
+            <input type="text" class="form-control" id="name" th:field="${tournament.name}" required>
         </div>
-        <button type="submit" class="btn btn-primary" th:text="${athlete.athleteId != null ? 'Update Athlete' : 'Add Athlete'}">Add Athlete</button>
+        <button type="submit" class="btn btn-primary" th:text="${tournament.tournamentId != null ? 'Update Tournament' : 'Add Tournament'}"></button>
     </form>
 </div>
 </body>

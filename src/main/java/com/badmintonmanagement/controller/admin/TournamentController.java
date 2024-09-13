@@ -1,11 +1,16 @@
 package com.badmintonmanagement.controller.admin;
 
+import com.badmintonmanagement.entity.CompetitionTable;
 import com.badmintonmanagement.entity.Tournament;
+import com.badmintonmanagement.service.CompetitionTableService;
 import com.badmintonmanagement.service.TournamentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -13,8 +18,10 @@ import java.util.List;
 @RequestMapping("/admin")
 public class TournamentController {
     private final TournamentService tournamentService;
-    public TournamentController(TournamentService tournamentService) {
+    private final CompetitionTableService competitionTableService;
+    public TournamentController(TournamentService tournamentService, CompetitionTableService competitionTableService) {
         this.tournamentService = tournamentService;
+        this.competitionTableService = competitionTableService;
     }
     @GetMapping("/tournaments")
     public String getAllTournaments(Model model) {
@@ -26,6 +33,44 @@ public class TournamentController {
         model.addAttribute("tournaments", tournaments);
         model.addAttribute("message", message);
         return "admin/tournament/tournaments";
+    }
+    @GetMapping("/tournaments/new")
+    public String newTournament(Model model) {
+        model.addAttribute("tournament", new Tournament());
+        model.addAttribute("title", "Add New Tournament");
+        return "admin/tournament/add_tournament";
+    }
+    @PostMapping("/tournaments/save")
+    public String savedTournament(Tournament tournament, RedirectAttributes ra) {
+        String success;
+        if (tournament.getTournamentId() != null) {
+            success = "Update tournament successfully!!";
+        }
+        else {
+            success = "Insert tournament successfully!!";
+        }
+        tournamentService.save(tournament);
+        ra.addFlashAttribute("success", success);
+        return "redirect:/admin/tournaments";
+    }
+    @GetMapping("/tournaments/{tournamentId}/competitionTables")
+    public String getCompetitionTablesByTournament(@PathVariable Integer tournamentId, Model model) {
+        List<CompetitionTable> competitionTables = competitionTableService.getCompetitionTableByTournamentId(tournamentId);
+        return "admin/competitionTable/competitionTables";
+    }
+    @GetMapping("/tournaments/update/{tournamentId}")
+    public String updateTournament(@PathVariable Integer tournamentId, Model model) {
+        Tournament tournament = tournamentService.getById(tournamentId);
+        model.addAttribute("tournament", tournament);
+        model.addAttribute("title", "Update Tournament: " + tournament.getName());
+        return "admin/tournament/add_tournament";
+    }
+    @GetMapping("/tournaments/delete/{tournamentId}")
+    public String deleteTournament(@PathVariable Integer tournamentId, RedirectAttributes ra) {
+        String name = tournamentService.getById(tournamentId).getName();
+        tournamentService.delete(tournamentId);
+        ra.addFlashAttribute("success", "Delete Tournament: " + name + " successfully!!");
+        return "redirect:/admin/tournaments";
     }
 //    @GetMapping("/competitionTables/{competitionTableId}")
 //    public String getAllAthletes(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException {
