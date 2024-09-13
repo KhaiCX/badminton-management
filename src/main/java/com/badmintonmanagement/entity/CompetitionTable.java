@@ -17,4 +17,7 @@ public class CompetitionTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer competitionTableId;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
 }

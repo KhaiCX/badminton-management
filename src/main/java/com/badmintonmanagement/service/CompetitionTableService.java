@@ -28,4 +28,8 @@ public class CompetitionTableService {
             throw new CompetitionTableNotFoundException("Không tìm thấy bảng");
         }
     }
+
+    public List<CompetitionTable> getCompetitionTableByTournamentId(Integer tournamentId) {
+        return competitionTableRepository.findCompetitionTablesByTournamentId(tournamentId);
+    }
 }
