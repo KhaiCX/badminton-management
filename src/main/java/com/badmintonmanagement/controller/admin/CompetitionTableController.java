@@ -2,8 +2,8 @@ package com.badmintonmanagement.controller.admin;
 
 import com.badmintonmanagement.entity.Athlete;
 import com.badmintonmanagement.entity.CompetitionTable;
+import com.badmintonmanagement.entity.Tournament;
 import com.badmintonmanagement.entity.User;
-import com.badmintonmanagement.exception.AthleteNotFoundException;
 import com.badmintonmanagement.exception.CompetitionTableNotFoundException;
 import com.badmintonmanagement.service.AthleteService;
 import com.badmintonmanagement.service.CompetitionTableService;
@@ -105,50 +105,43 @@ public class CompetitionTableController {
     public String getAthletesByCompetitionTable(@PathVariable Integer tournamentId,
                                                 @PathVariable Integer competitionTableId,
                                                 Model model) throws CompetitionTableNotFoundException {
+        Tournament tournament = tournamentService.getById(tournamentId);
         CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
         List<Athlete> athletes = athleteService.getAthletesByCompetitionTable(competitionTable);
-        String message = null;
-        if (athletes.isEmpty()) {
-            message = "No data available!!";
-        }
+        String message = athletes.isEmpty() ? "No data available!!" : "";
         model.addAttribute("athletes", athletes);
         model.addAttribute("message", message);
-        model.addAttribute("title", "Manage Athlete in the Competition table: " + competitionTable.getName());
+        model.addAttribute("tournamentId", tournamentId);
+        model.addAttribute("competitionTableId", competitionTableId);
+        model.addAttribute("title", "Manage Athlete in the Competition table: " + competitionTable.getName() + " of the tournament: " + tournament.getName());
         return "admin/athlete/athletes";
     }
-    @GetMapping("/competitionTables/{competitionTableId}/athletes/{athleteId}")
-    public String updateAthlete(@PathVariable Integer competitionTableId, @PathVariable Integer athleteId, Model model) throws AthleteNotFoundException, CompetitionTableNotFoundException {
-        try {
-            CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
-            List<User> users = userService.getAllUsers();
-            Athlete athlete = athleteService.getAthletesById(athleteId);
-            User user = athlete.getUser();
-            athlete.setCompetitionTable(competitionTable);
-            model.addAttribute("users", users);
-            model.addAttribute("user", user);
-            model.addAttribute("athlete", athlete);
-            return "admin/competition/add_athlete";
-        } catch (AthleteNotFoundException ex) {
-            throw new AthleteNotFoundException(ex.getMessage());
-        } catch (CompetitionTableNotFoundException ex) {
-            throw new CompetitionTableNotFoundException(ex.getMessage());
-        }
+    @GetMapping("/tournaments/{tournamentId}/competitionTables/{competitionTableId}/athletes/new")
+    public String newAthlete(@PathVariable Integer tournamentId,
+                             @PathVariable Integer competitionTableId,
+                             Model model) throws CompetitionTableNotFoundException {
+        Athlete athlete = new Athlete();
+        Tournament tournament = tournamentService.getById(tournamentId);
+        CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
+        List<User> users = userService.getAllUsers();
+        athlete.setCompetitionTable(competitionTable);
+        model.addAttribute("athlete", athlete);
+        model.addAttribute("users", users);
+        model.addAttribute("tournamentId", tournamentId);
+        model.addAttribute("competitionTableId", competitionTableId);
+        model.addAttribute("title", "Add athlete in the Competition table: " + competitionTable.getName() + " of the tournament:" + tournament.getName());
+        return "admin/athlete/add_athlete";
     }
-/*    @PostMapping("/competitionTables/save")
-    public String savedAthlete(Athlete athlete, RedirectAttributes ra) {
+    @PostMapping("/athletes/save")
+    public String savedAthlete(Athlete athlete,
+                               @RequestParam Integer tournamentId,
+                               RedirectAttributes ra) {
         athlete.setNumberOfWins(Objects.isNull(athlete.getNumberOfWins()) || Objects.equals(athlete.getNumberOfWins(), 0) ? 0 : athlete.getNumberOfWins());
         athlete.setNumberOfLosses(Objects.isNull(athlete.getNumberOfLosses()) || Objects.equals(athlete.getNumberOfLosses(), 0) ? 0 : athlete.getNumberOfLosses());
         athlete.setPoint(Objects.isNull(athlete.getPoint()) || Objects.equals(athlete.getPoint(), 0) ? 0 : athlete.getPoint());
-        //if (Objects.isNull(athlete.getNumberOfWins()) && Objects.equals(athlete.getNumberOfWins(), 0))
+        String success = athlete.getAthleteId() != null ? "Update athlete successfully!!" : "Insert athlete successfully!!";
         athleteService.save(athlete);
-        String success;
-        if (athlete.getAthleteId() != null) {
-            success = "Update athlete successfully!!";
-        }
-        else {
-            success = "Insert athlete successfully!!";
-        }
         ra.addFlashAttribute("success", success);
-        return "redirect:" + athlete.getCompetitionTable().getCompetitionTableId();
-    }*/
+        return "redirect:/admin/tournaments/" + tournamentId + "/competitionTables/" + athlete.getCompetitionTable().getCompetitionTableId() + "/athletes";
+    }
 }

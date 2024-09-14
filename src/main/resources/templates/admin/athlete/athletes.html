@@ -47,7 +47,7 @@
             </div>
             <!-- Add New Athlete Button -->
             <div>
-                <a class="btn btn-success">Add New Athlete</a>
+                <a class="btn btn-success" th:href="@{'/admin/tournaments/' + ${tournamentId} + '/competitionTables/' + ${competitionTableId} + '/athletes/new'}">Add New Athlete</a>
             </div>
         </main>
 
