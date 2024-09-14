@@ -61,6 +61,15 @@ public class CompetitionTableController {
         model.addAttribute("message", "");
         return "redirect:/admin/tournaments/" + competitionTable.getTournament().getTournamentId() + "/competitionTables";
     }
+    @GetMapping("/tournaments/{tournamentId}/competitionTables/delete/{competitionTableId}")
+    public String deleteCompetitionTableByTournament(@PathVariable Integer tournamentId,
+                                                     @PathVariable Integer competitionTableId,
+                                                     RedirectAttributes ra) throws CompetitionTableNotFoundException {
+        String name = competitionTableService.getCompetitionTableById(competitionTableId).getName();
+        competitionTableService.delete(competitionTableId);
+        ra.addFlashAttribute("success", "Delete Competition table: " + name + "successfully!!");
+        return "redirect:/admin/tournaments/" + tournamentId + "/competitionTables";
+    }
     @GetMapping("/competitionTables/{competitionTableId}")
     public String getAllAthletes(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException {
         try {

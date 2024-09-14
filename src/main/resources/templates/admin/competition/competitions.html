@@ -36,7 +36,7 @@
                         <td>
                             <a class="btn btn-info btn-sm">Athletes</a>
                             <a class="btn btn-primary btn-sm" th:href="@{'/admin/tournaments/' + ${tournamentId} + '/competitionTables/update/' + ${competitionTable.competitionTableId}}">Update</a>
-                            <a class="btn btn-danger btn-sm">Delete</a>
+                            <a class="btn btn-danger btn-sm" th:href="@{'/admin/tournaments/' + ${tournamentId} + '/competitionTables/delete/' + ${competitionTable.competitionTableId}}">Delete</a>
                         </td>
                     </tr>
                     </tbody>

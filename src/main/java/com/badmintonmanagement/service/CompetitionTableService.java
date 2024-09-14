@@ -29,11 +29,15 @@ public class CompetitionTableService {
         }
     }
 
-    public List<CompetitionTable> getCompetitionTableByTournamentId(Integer tournamentId) {
+    public List<CompetitionTable> getCompetitionTablesByTournamentId(Integer tournamentId) {
         return competitionTableRepository.findCompetitionTablesByTournamentId(tournamentId);
     }
 
     public void save(CompetitionTable competitionTable) {
         competitionTableRepository.save(competitionTable);
+    }
+
+    public void delete(Integer competitionTableId) {
+        competitionTableRepository.deleteById(competitionTableId);
     }
 }

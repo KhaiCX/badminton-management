@@ -69,7 +69,7 @@ public class TournamentController {
     }
     @GetMapping("/tournaments/{tournamentId}/competitionTables")
     public String getCompetitionTablesByTournament(@PathVariable Integer tournamentId, Model model) {
-        List<CompetitionTable> competitionTables = competitionTableService.getCompetitionTableByTournamentId(tournamentId);
+        List<CompetitionTable> competitionTables = competitionTableService.getCompetitionTablesByTournamentId(tournamentId);
         Tournament tournament = tournamentService.getById(tournamentId);
         String message;
         if (competitionTables.isEmpty()) {
