@@ -35,4 +35,8 @@ public class AthleteService {
             throw new AthleteNotFoundException("Không tìm thấy vận động viên");
         }
     }
+
+    public void delete(Integer athleteId) {
+        athleteRepository.deleteById(athleteId);
+    }
 }

@@ -160,4 +160,17 @@ public class CompetitionTableController {
         model.addAttribute("title", "Update athlete: " + athlete.getUser().getFullName());
         return "admin/athlete/add_athlete";
     }
+    @GetMapping("/competitionTables/{competitionTableId}/athletes/delete/{athleteId}")
+    public String deleteAthlete(@PathVariable Integer competitionTableId,
+                                @PathVariable Integer athleteId,
+                                RedirectAttributes ra,
+                                Model model) throws AthleteNotFoundException, CompetitionTableNotFoundException {
+        String success = "Delete athlete: " + athleteService.getAthletesById(athleteId).getUser().getFullName() + " successfully!!";
+        athleteService.delete(athleteId);
+        CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
+        Tournament tournament = competitionTable.getTournament();
+        ra.addFlashAttribute("success", success);
+        model.addAttribute("title", "Manage Athlete in the Competition table: " + competitionTable.getName() + " of the tournament: " + tournament.getName());
+        return "redirect:/admin/tournaments/" + tournament.getTournamentId() + "/competitionTables/" + competitionTableId + "/athletes";
+    }
 }
