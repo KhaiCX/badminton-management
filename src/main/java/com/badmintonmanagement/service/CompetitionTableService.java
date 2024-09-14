@@ -32,4 +32,8 @@ public class CompetitionTableService {
     public List<CompetitionTable> getCompetitionTableByTournamentId(Integer tournamentId) {
         return competitionTableRepository.findCompetitionTablesByTournamentId(tournamentId);
     }
+
+    public void save(CompetitionTable competitionTable) {
+        competitionTableRepository.save(competitionTable);
+    }
 }

@@ -5,9 +5,9 @@ import com.badmintonmanagement.entity.CompetitionTable;
 import com.badmintonmanagement.entity.User;
 import com.badmintonmanagement.exception.AthleteNotFoundException;
 import com.badmintonmanagement.exception.CompetitionTableNotFoundException;
-import com.badmintonmanagement.exception.UserNotFoundException;
 import com.badmintonmanagement.service.AthleteService;
 import com.badmintonmanagement.service.CompetitionTableService;
+import com.badmintonmanagement.service.TournamentService;
 import com.badmintonmanagement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +23,34 @@ public class CompetitionTableController {
     private final CompetitionTableService competitionTableService;
     private final AthleteService athleteService;
     private final UserService userService;
-    public CompetitionTableController(CompetitionTableService competitionTableService, AthleteService athleteService, UserService userService) {
+    private final TournamentService tournamentService;
+    public CompetitionTableController(TournamentService tournamentService, CompetitionTableService competitionTableService, AthleteService athleteService, UserService userService) {
+        this.tournamentService = tournamentService;
         this.competitionTableService = competitionTableService;
         this.athleteService = athleteService;
         this.userService = userService;
+    }
+    @GetMapping("/tournaments/{tournamentId}/new")
+    public String newCompetitionTableByTournament(@PathVariable Integer tournamentId, Model model) {
+        CompetitionTable competitionTable = new CompetitionTable();
+        competitionTable.setTournament(tournamentService.getById(tournamentId));
+        model.addAttribute("competitionTable", competitionTable);
+        model.addAttribute("title", "Add new Competition Table in the tournament");
+        return "admin/competition/add_competitionTable";
+    }
+    @PostMapping("/competitionTables/save")
+    public String savedCompetitionTable(CompetitionTable competitionTable, RedirectAttributes ra, Model model) {
+        String success;
+        if (competitionTable.getCompetitionTableId() != null) {
+            success = "Update competition table: " + competitionTable.getName() + "successfully!!";
+        }
+        else {
+            success = "Insert competition table: " + competitionTable.getName() + "successfully!!";
+        }
+        competitionTableService.save(competitionTable);
+        ra.addFlashAttribute("success", success);
+        model.addAttribute("message", "");
+        return "redirect:/admin/tournaments/" + competitionTable.getTournament().getTournamentId() + "/competitionTables";
     }
     @GetMapping("/competitionTables/{competitionTableId}")
     public String getAllAthletes(@PathVariable Integer competitionTableId, Model model) throws CompetitionTableNotFoundException {
@@ -77,7 +101,7 @@ public class CompetitionTableController {
             throw new CompetitionTableNotFoundException(ex.getMessage());
         }
     }
-    @PostMapping("/competitionTables/save")
+/*    @PostMapping("/competitionTables/save")
     public String savedAthlete(Athlete athlete, RedirectAttributes ra) {
         athlete.setNumberOfWins(Objects.isNull(athlete.getNumberOfWins()) || Objects.equals(athlete.getNumberOfWins(), 0) ? 0 : athlete.getNumberOfWins());
         athlete.setNumberOfLosses(Objects.isNull(athlete.getNumberOfLosses()) || Objects.equals(athlete.getNumberOfLosses(), 0) ? 0 : athlete.getNumberOfLosses());
@@ -93,5 +117,5 @@ public class CompetitionTableController {
         }
         ra.addFlashAttribute("success", success);
         return "redirect:" + athlete.getCompetitionTable().getCompetitionTableId();
-    }
+    }*/
 }

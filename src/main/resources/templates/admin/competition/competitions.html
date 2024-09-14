@@ -14,11 +14,14 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2" th:text="${title}"></h1>
             </div>
+            <div th:if="${success!=null}" class="alert alert-success text-center">
+                [[${success}]]
+            </div>
             <div th:if="${message != null && message != ''}" class="card-title text-center" th:text="${message}"></div>
             <!-- Competition Table -->
-            <div class="table-responsive" th:if="${message == ''}">
+            <div class="table-responsive" th:if="${message == '' || message == null}">
                 <table class="table table-striped table-sm">
-                    <input type="hidden" th:text="${tournamentId}">
+                    <input type="hidden" th:field="${tournamentId}" />
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -40,7 +43,7 @@
             </div>
             <!-- Add New Competition Table Button -->
             <div>
-                <a class="btn btn-success">Add New Competition Table</a>
+                <a class="btn btn-success" th:href="@{'/admin/tournaments/' + ${tournamentId} + '/new'}">Add New Competition Table</a>
             </div>
         </main>
     </div>
