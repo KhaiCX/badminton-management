@@ -38,6 +38,15 @@ public class CompetitionTableController {
         model.addAttribute("title", "Add new Competition Table in the tournament");
         return "admin/competition/add_competitionTable";
     }
+    @GetMapping("/tournaments/{tournamentId}/competitionTables/update/{competitionTableId}")
+    public String updateCompetitionTableByTournament(@PathVariable Integer tournamentId,
+                                                     @PathVariable Integer competitionTableId,
+                                                     Model model) throws CompetitionTableNotFoundException {
+        CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
+        competitionTable.setTournament(tournamentService.getById(tournamentId));
+        model.addAttribute("competitionTable", competitionTable);
+        return "admin/competition/add_competitionTable";
+    }
     @PostMapping("/competitionTables/save")
     public String savedCompetitionTable(CompetitionTable competitionTable, RedirectAttributes ra, Model model) {
         String success;
