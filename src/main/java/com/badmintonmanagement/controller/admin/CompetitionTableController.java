@@ -4,6 +4,7 @@ import com.badmintonmanagement.entity.Athlete;
 import com.badmintonmanagement.entity.CompetitionTable;
 import com.badmintonmanagement.entity.Tournament;
 import com.badmintonmanagement.entity.User;
+import com.badmintonmanagement.exception.AthleteNotFoundException;
 import com.badmintonmanagement.exception.CompetitionTableNotFoundException;
 import com.badmintonmanagement.service.AthleteService;
 import com.badmintonmanagement.service.CompetitionTableService;
@@ -143,5 +144,20 @@ public class CompetitionTableController {
         athleteService.save(athlete);
         ra.addFlashAttribute("success", success);
         return "redirect:/admin/tournaments/" + tournamentId + "/competitionTables/" + athlete.getCompetitionTable().getCompetitionTableId() + "/athletes";
+    }
+    @GetMapping("/competitionTables/{competitionTableId}/athletes/update/{athleteId}")
+    public String updateAthlete(@PathVariable Integer competitionTableId,
+                                @PathVariable Integer athleteId,
+                                Model model) throws AthleteNotFoundException, CompetitionTableNotFoundException {
+        Athlete athlete = athleteService.getAthletesById(athleteId);
+        CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
+        List<User> users = userService.getAllUsers();
+        athlete.setCompetitionTable(competitionTable);
+        model.addAttribute("athlete", athlete);
+        model.addAttribute("tournamentId", competitionTable.getTournament().getTournamentId());
+        model.addAttribute("competitionId", competitionTable.getCompetitionTableId());
+        model.addAttribute("users", users);
+        model.addAttribute("title", "Update athlete: " + athlete.getUser().getFullName());
+        return "admin/athlete/add_athlete";
     }
 }
