@@ -101,6 +101,21 @@ public class CompetitionTableController {
             throw new CompetitionTableNotFoundException(ex.getMessage());
         }
     }
+    @GetMapping("/tournaments/{tournamentId}/competitionTables/{competitionTableId}/athletes")
+    public String getAthletesByCompetitionTable(@PathVariable Integer tournamentId,
+                                                @PathVariable Integer competitionTableId,
+                                                Model model) throws CompetitionTableNotFoundException {
+        CompetitionTable competitionTable = competitionTableService.getCompetitionTableById(competitionTableId);
+        List<Athlete> athletes = athleteService.getAthletesByCompetitionTable(competitionTable);
+        String message = null;
+        if (athletes.isEmpty()) {
+            message = "No data available!!";
+        }
+        model.addAttribute("athletes", athletes);
+        model.addAttribute("message", message);
+        model.addAttribute("title", "Manage Athlete in the Competition table: " + competitionTable.getName());
+        return "admin/athlete/athletes";
+    }
     @GetMapping("/competitionTables/{competitionTableId}/athletes/{athleteId}")
     public String updateAthlete(@PathVariable Integer competitionTableId, @PathVariable Integer athleteId, Model model) throws AthleteNotFoundException, CompetitionTableNotFoundException {
         try {
