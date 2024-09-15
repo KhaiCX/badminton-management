@@ -1,58 +1,24 @@
-.match-card {
-    background-color: #decccc;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    position: relative;
+.col-md-6 {
+    padding: 0;
 }
-.match-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #ffd700;
-    width: 100%;
-    height: 15px;
-    border-radius: 10px 10px 0 0;
-}
-.vs-logo {
-    font-size: 30px;
-    font-weight: bold;
-    color: #ff8c00;
-    text-shadow: 2px 2px #000;
-}
-.team-flag {
-    width: 30px;
+.flag {
+    width: 16px;
     height: 20px;
+    margin-right: 8px;
 }
-.match-info {
-    font-size: 14px;
+.winner {
     font-weight: bold;
-    color: #666;
 }
-.table-custom thead th {
-    background-color: #0056b3;
-    color: white;
-    text-align: center;
+.loser {
+    color: #6c757d;
 }
-.table-custom tbody tr:nth-child(1) td {
-    background-color: #f8d7da;
+.table {
+    border: 1px solid #dee2e6;
+    border-collapse: collapse;
 }
-.table-custom tbody tr:nth-child(2) td {
-    background-color: #fff3cd;
+.table th, td {
+    border: none;
 }
-.table-custom tbody tr:nth-child(3) td {
-    background-color: #d4edda;
-}
-.table-custom tbody tr:nth-child(4) td {
-    background-color: #d1ecf1;
-}
-.bold {
-    font-weight: bold;
-    color: red;
-}
-.team-logo {
-    width: 30px;
-    height: 30px;
+td:nth-child(1), th:nth-child(1) {
+    width: 200px;
 }

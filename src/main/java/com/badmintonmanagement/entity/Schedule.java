@@ -23,4 +23,7 @@ public class Schedule {
     private LocalDateTime time;
     private Integer resultUserOne;
     private Integer resultUserTwo;
+    private String category;
+    private String imageUserOne;
+    private String imageUserTwo;
 }
