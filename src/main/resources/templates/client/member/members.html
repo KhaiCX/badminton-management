@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{client/head :: head('Thành viên')}">
+<head th:replace="~{client/head :: head('Thành viên')}">
     <title></title>
 </head>
 <body>
+<link rel="stylesheet" type="text/css" th:href="@{client/css/members.css}">
 <nav th:replace="~{client/navbar :: navbar}"></nav>
 <div class="container mt-4">
     <h1 class="mb-4">Danh Sách Thành Viên</h1>

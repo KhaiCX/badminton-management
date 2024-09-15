@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{client/head :: head('Lịch thi đấu')}">
+<head th:replace="~{client/head :: head('Lịch thi đấu')}">
     <title></title>
-
 </head>
 <body>
+<link rel="stylesheet" type="text/css" th:href="@{/client/css/schedules.css}">
 <nav th:replace="~{client/navbar :: navbar}"></nav>
 <div class="container my-4">
     <div class="row justify-content-center">
