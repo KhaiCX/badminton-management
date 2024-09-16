@@ -13,7 +13,6 @@
             <th:block th:if="${tournamentIsNullOrEmpty == null || tournamentIsNullOrEmpty == ''}" th:each="tournament : ${tournaments}">
                 <h5 class="text-center">Giải cầu lông [[${tournament.name}]]</h5>
                 <h5 class="mb-4 text-center">Lịch thi đấu</h5>
-                    <div class="row">
                         <th:block th:each="schedule : ${schedules}">
                             <div class="col-md-6">
                                 <table class="table">
@@ -46,7 +45,6 @@
                                 </table>
                             </div>
                         </th:block>
-                    </div>
             </th:block>
         </div>
     </div>
