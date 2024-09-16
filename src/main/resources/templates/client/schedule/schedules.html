@@ -26,20 +26,20 @@
                                     <tbody>
                                     <tr>
                                         <td class=>
-                                            <img th:if="${schedule.imageUserOne != null && schedule.imageUserOne != ''}" th:src="@{'/client/images/member/' + ${schedule.imageUserOne}}" alt="Image User one" class="flag" src="">
-                                            <img th:if="${schedule.imageUserOne == null || schedule.imageUserOne == ''}" th:src="@{/client/images/member/default_user.jpg}" alt="Image User one" class="flag" src="">
-                                            <span th:class="${schedule.resultUserOne > schedule.resultUserTwo ? 'winner' : 'loser'}" >[[${schedule.userOne}]]</span>
+                                            <img th:if="${schedule.imageUser1 != null && schedule.imageUser1 != ''}" th:src="@{'/client/images/member/' + ${schedule.imageUser1}}" alt="Image User one" class="flag" src="">
+                                            <img th:if="${schedule.imageUser1 == null || schedule.imageUser1 == ''}" th:src="@{/client/images/member/default_user.jpg}" alt="Image User one" class="flag" src="">
+                                            <span th:class="${schedule.finalResultUser1 > schedule.finalResultUser2 ? 'winner' : 'loser'}">[[${schedule.user1}]]</span>
                                         </td>
-                                        <td th:class="${schedule.resultUserOne > schedule.resultUserTwo ? 'winner' : 'loser'}">[[${schedule.resultUserOne}]]</td>
+                                        <td th:class="${schedule.finalResultUser1 > schedule.finalResultUser2 ? 'winner' : 'loser'}" th:text="${schedule.resultRound1User1 == null || schedule.resultRound2User1 == null || schedule.resultRound3User1 == null ? schedule.finalResultUser1 : schedule.resultRound1User1 + ' ' + schedule.resultRound2User1 + ' ' + schedule.resultRound3User1}"></td>
                                         <td th:text="${#temporals.format(schedule.time, 'dd-MM-yyyy')}"></td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img th:if="${schedule.imageUserTwo != null && schedule.imageUserTwo != ''}" th:src="@{'/client/images/member/' + ${schedule.imageUserTwo}}" alt="Image User two" class="flag" src="">
-                                            <img th:if="${schedule.imageUserTwo == null || schedule.imageUserTwo == ''}" th:src="@{/client/images/member/default_user.jpg}" alt="Image User two" class="flag" src="">
-                                            <span th:class="${schedule.resultUserTwo < schedule.resultUserOne ? 'loser' : 'winner'}">[[${schedule.userTwo}]]</span>
+                                            <img th:if="${schedule.imageUser2 != null && schedule.imageUser2 != ''}" th:src="@{'/client/images/member/' + ${schedule.imageUser2}}" alt="Image User two" class="flag" src="">
+                                            <img th:if="${schedule.imageUser2 == null || schedule.imageUser2 == ''}" th:src="@{/client/images/member/default_user.jpg}" alt="Image User two" class="flag" src="">
+                                            <span th:class="${schedule.finalResultUser2 < schedule.finalResultUser1 ? 'loser' : 'winner'}">[[${schedule.user2}]]</span>
                                         </td>
-                                        <td th:class="${schedule.resultUserTwo < schedule.resultUserOne ? 'loser' : 'winner'}">[[${schedule.resultUserTwo}]]</td>
+                                        <td th:class="${schedule.finalResultUser2 < schedule.finalResultUser1 ? 'loser' : 'winner'}" th:text="${schedule.resultRound1User2 == null || schedule.resultRound2User2 == null || schedule.resultRound3User2 == null ? schedule.finalResultUser2 : schedule.resultRound1User2 + ' ' + schedule.resultRound2User2 + ' ' + schedule.resultRound3User2}"></td>
                                     </tr>
                                     </tbody>
                                 </table>
