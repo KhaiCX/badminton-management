@@ -16,11 +16,9 @@
     border: 1px solid #dee2e6;
     border-collapse: collapse;
 }
-.table th {
-    white-space: nowrap;
-}
 .table th, td {
     border: none;
+    white-space: nowrap;
 }
 td:nth-child(1), th:nth-child(1) {
     width: 200px;
