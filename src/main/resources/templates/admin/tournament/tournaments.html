@@ -33,7 +33,7 @@
                         <td th:text="${tournament.tournamentId}"></td>
                         <td id="name" th:text="${tournament.name}"></td>
                         <td>
-                            <a class="btn btn-info btn-sm" th:href="@{'/admin/tournaments/' + ${tournament.tournamentId} + '/competitionTables'}">Competition tables</a>
+                            <a class="btn btn-info btn-sm">Schedules</a>
                             <a class="btn btn-primary btn-sm" th:href="@{'/admin/tournaments/update/' + ${tournament.tournamentId}}">Update</a>
                             <a class="btn btn-danger btn-sm" th:href="@{'/admin/tournaments/delete/' + ${tournament.tournamentId}}">Delete</a>
                         </td>
