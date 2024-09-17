@@ -14,6 +14,6 @@ public class ScheduleService {
     }
 
     public List<Schedule> getSchedulesByTournament(Integer tournamentId) {
-        return scheduleRepository.findAllByTournamentId(tournamentId);
+        return scheduleRepository.findAll();
     }
 }
