@@ -13,7 +13,7 @@ public class ScheduleService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public List<Schedule> getSchedulesByTournament(Integer tournamentId) {
+    public List<Schedule> getAll() {
         return scheduleRepository.findAll();
     }
 }
