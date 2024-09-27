@@ -18,18 +18,24 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scheduleId;
-    private String user1;
-    private String user2;
+    private String athlete1;
+    private String athlete2;
+    private String pairOfAthletes1;
+    private String pairOfAthletes2;
     private LocalDateTime time;
-    private Integer resultRound1User1;
-    private Integer resultRound2User1;
-    private Integer resultRound3User1;
-    private Integer resultRound1User2;
-    private Integer resultRound2User2;
-    private Integer resultRound3User2;
-    private Integer finalResultUser1;
-    private Integer finalResultUser2;
+    private Integer resultRound1Athlete1;
+    private Integer resultRound2Athlete1;
+    private Integer resultRound3Athlete1;
+    private Integer resultRound1Athlete2;
+    private Integer resultRound2Athlete2;
+    private Integer resultRound3Athlete2;
+    private Integer finalResultAthlete1;
+    private Integer finalResultAthlete2;
     private String category;
-    private String imageUser1;
-    private String imageUser2;
+    private String imageAthlete1;
+    private String imageAthlete2;
+    private String competition;
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
 }
