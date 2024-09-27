@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{admin/head :: head('Tournament Management')}">
+<head th:replace="~{admin/head :: head('Schedules Management')}">
     <title></title>
 </head>
 <body>
@@ -12,7 +12,7 @@
         <!-- Main Content -->
         <main role="main" class="col-md-9ml-sm-auto col-lg-10 content mx-auto">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Tournament Management</h1>
+                <h1 class="h2">Schedules Management</h1>
             </div>
             <!-- Tournament Table -->
             <div th:if="${success!=null}" class="alert alert-success text-center">
@@ -41,9 +41,9 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Add New Tournament Button -->
+            <!-- Add New Schedule Button -->
             <div>
-                <a class="btn btn-success" th:href="@{/admin/tournaments/new}">Add New Tournament</a>
+                <a class="btn btn-success" th:href="@{'/admin/tournaments/' + ${tournamentId} + '/schedules/new'}">Add New Schedule</a>
             </div>
         </main>
     </div>

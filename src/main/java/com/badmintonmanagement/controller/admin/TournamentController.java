@@ -1,6 +1,8 @@
 package com.badmintonmanagement.controller.admin;
 
+import com.badmintonmanagement.entity.Schedule;
 import com.badmintonmanagement.entity.Tournament;
+import com.badmintonmanagement.service.ScheduleService;
 import com.badmintonmanagement.service.TournamentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +18,10 @@ import java.util.List;
 @RequestMapping("/admin")
 public class TournamentController {
     private final TournamentService tournamentService;
-    public TournamentController(TournamentService tournamentService) {
+    private final ScheduleService scheduleService;
+    public TournamentController(TournamentService tournamentService, ScheduleService scheduleService) {
         this.tournamentService = tournamentService;
+        this.scheduleService = scheduleService;
     }
     @GetMapping("/tournaments")
     public String getAllTournaments(Model model) {
@@ -62,5 +66,16 @@ public class TournamentController {
         tournamentService.delete(tournamentId);
         ra.addFlashAttribute("success", "Delete Tournament: " + name + " successfully!!");
         return "redirect:/admin/tournaments";
+    }
+    @GetMapping("/tournaments/{tournamentId}/schedules")
+    public String getSchedulesByTournament(@PathVariable Integer tournamentId,
+                                           Model model) {
+        Tournament tournament = tournamentService.getById(tournamentId);
+        List<Schedule> schedules = scheduleService.getSchedulesByTournament(tournament);
+        String message = schedules.isEmpty() ? "No data available" : "";
+        model.addAttribute("message", message);
+        model.addAttribute("schedules", schedules);
+        model.addAttribute("tournamentId", tournamentId);
+        return "admin/schedule/schedules";
     }
 }
