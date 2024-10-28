@@ -5,6 +5,7 @@ import com.badmintonmanagement.entity.Detail;
 import com.badmintonmanagement.exception.ArticleNotFoundException;
 import com.badmintonmanagement.service.ArticleService;
 import com.badmintonmanagement.service.DetailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/articles")
 public class ArticleClientController {
     private final ArticleService articleService;
     private final DetailService detailService;
-    public ArticleClientController(ArticleService articleService, DetailService detailService) {
-        this.articleService = articleService;
-        this.detailService = detailService;
-    }
     @GetMapping()
     public String articles(Model model) {
         List<Article> articles = articleService.getAllArticles();

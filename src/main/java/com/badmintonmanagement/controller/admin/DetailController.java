@@ -7,6 +7,7 @@ import com.badmintonmanagement.exception.DetailNotFoundException;
 import com.badmintonmanagement.exception.UserNotFoundException;
 import com.badmintonmanagement.service.DetailService;
 import com.badmintonmanagement.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class DetailController {
     private final DetailService detailService;
     private final UserService userService;
-    public DetailController(DetailService detailService, UserService userService) {
-        this.detailService = detailService;
-        this.userService = userService;
-    }
     @GetMapping("/detail/{userId}")
     public String getDetailsByUser(@PathVariable Integer userId, Model model) throws Exception {
         try {

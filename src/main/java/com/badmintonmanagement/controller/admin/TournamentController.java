@@ -4,6 +4,7 @@ import com.badmintonmanagement.entity.Schedule;
 import com.badmintonmanagement.entity.Tournament;
 import com.badmintonmanagement.service.ScheduleService;
 import com.badmintonmanagement.service.TournamentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class TournamentController {
     private final TournamentService tournamentService;
     private final ScheduleService scheduleService;
-    public TournamentController(TournamentService tournamentService, ScheduleService scheduleService) {
-        this.tournamentService = tournamentService;
-        this.scheduleService = scheduleService;
-    }
     @GetMapping("/tournaments")
     public String getAllTournaments(Model model) {
         List<Tournament> tournaments = tournamentService.getAll();
