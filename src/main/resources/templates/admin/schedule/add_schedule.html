@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/head :: head('Add New Schedule')}">
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-5" th:text="${title}"></h2>
+
+    <form th:action="@{/admin/schedules/save}" th:object="${schedule}" method="post">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category:</label>
+                    <select id="category" name="category" th:field="${schedule.category}">
+                        <option value="" disabled selected>Select category</option>
+                        <option th:each="category : ${categories}"
+                                th:value="${category}"
+                                th:text="${category}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <input type="hidden" th:field="${schedule.tournament}" />
+            <input type="hidden" th:field="${schedule.scheduleId}" />
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="athlete1" class="form-label">Athlete 1:</label>
+                    <select id="athlete1" name="category" th:field="${schedule.athlete1}">
+                        <option value="" disabled selected>Select athlete 2</option>
+                        <option th:each="user : ${users}"
+                                th:value="${user.fullName}"
+                                th:text="${user.fullName}">
+                        </option>
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <label for="resultRound1Athlete1" class="form-label">Round 1:</label>
+                        <input type="number" class="form-control" id="resultRound1Athlete1" th:field="${schedule.resultRound1Athlete1}" min="0" max="21" maxlength="2">
+                    </div>
+                    <div class="col-4">
+                        <label for="resultRound2Athlete1" class="form-label">Round 2:</label>
+                        <input type="number" class="form-control" id="resultRound2Athlete1" th:field="${schedule.resultRound2Athlete1}" min="0" max="21" maxlength="2">
+                    </div>
+                    <div class="col-4">
+                        <label for="resultRound3Athlete1" class="form-label">Round 3:</label>
+                        <input type="number" class="form-control" id="resultRound3Athlete1" th:field="${schedule.resultRound3Athlete1}" min="0" max="21" maxlength="2">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="athlete2" class="form-label">Athlete 2:</label>
+                    <select id="athlete2" name="category" th:field="${schedule.athlete2}">
+                        <option value="" disabled selected>Select athlete 2</option>
+                        <option th:each="user : ${users}"
+                                th:value="${user.fullName}"
+                                th:text="${user.fullName}">
+                        </option>
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <label for="resultRound1Athlete2" class="form-label">Round 1:</label>
+                        <input type="number" class="form-control" id="resultRound1Athlete2" th:field="${schedule.resultRound1Athlete2}" min="0" max="21" maxlength="2">
+                    </div>
+                    <div class="col-4">
+                        <label for="resultRound2Athlete2" class="form-label">Round 2:</label>
+                        <input type="number" class="form-control" id="resultRound2Athlete2" th:field="${schedule.resultRound2Athlete2}" min="0" max="21" maxlength="2">
+                    </div>
+                    <div class="col-4">
+                        <label for="resultRound3Athlete2" class="form-label">Round 3:</label>
+                        <input type="number" class="form-control" id="resultRound3Athlete2" th:field="${schedule.resultRound2Athlete2}" min="0" max="21" maxlength="2">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" th:text="${schedule.scheduleId != null ? 'Update Schedule' : 'Add Schedule'}"></button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
