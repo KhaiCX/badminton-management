@@ -25,4 +25,8 @@ public class ScheduleService {
     public List<Schedule> getSchedulesByTournament(Tournament tournament) {
         return scheduleRepository.findAllByTournament(tournament);
     }
+
+    public void savedSchedule(Schedule schedule) {
+        scheduleRepository.save(schedule);
+    }
 }

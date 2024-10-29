@@ -29,6 +29,9 @@ public class UserService {
             throw new UserNotFoundException("User not found with id: " + id);
         }
     }
+    public User getUserByName(String name) {
+        return userRepository.findByName(name);
+    }
     public void saveUser(User user) {
         userRepository.save(user);
     }
