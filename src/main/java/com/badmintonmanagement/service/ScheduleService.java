@@ -6,6 +6,7 @@ import com.badmintonmanagement.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ScheduleService {
@@ -28,5 +29,14 @@ public class ScheduleService {
 
     public void savedSchedule(Schedule schedule) {
         scheduleRepository.save(schedule);
+    }
+
+    public Schedule getById(Integer scheduleId) {
+        Optional<Schedule> scheduleOptional = scheduleRepository.findById(scheduleId);
+        return scheduleOptional.orElseGet(Schedule::new);
+    }
+
+    public void delete(Integer scheduleId) {
+        scheduleRepository.deleteById(scheduleId);
     }
 }

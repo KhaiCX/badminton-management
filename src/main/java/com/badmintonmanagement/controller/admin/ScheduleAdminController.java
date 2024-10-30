@@ -30,13 +30,31 @@ public class ScheduleAdminController {
         Tournament tournament = tournamentService.getById(tournamentId);
         Schedule schedule = new Schedule();
         schedule.setTournament(tournament);
-        List<String> categories = List.of("Vòng loại", "Tứ kết", "Bán kết", "Chung kết");
+        List<String> categories = getCategories();
         List<User> users = userService.getAllUsers();
         model.addAttribute("schedule", schedule);
         model.addAttribute("categories", categories);
         model.addAttribute("users", users);
         model.addAttribute("title", "Add new Schedule of tournament: " + tournament.getName());
         return "admin/schedule/add_schedule";
+    }
+    @GetMapping("/tournaments/{tournamentId}/schedules/update/{scheduleId}")
+    public String updateSchedule(@PathVariable Integer tournamentId, @PathVariable Integer scheduleId, Model model) {
+        Schedule schedule = schedulesService.getById(scheduleId);
+        schedule.setTournament(tournamentService.getById(tournamentId));
+        List<String> categories = getCategories();
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("schedule", schedule);
+        model.addAttribute("categories", categories);
+        model.addAttribute("users", users);
+        model.addAttribute("schedule", schedule);
+        return "admin/schedule/add_schedule";
+    }
+    @GetMapping("/tournaments/{tournamentId}/schedules/delete/{scheduleId}")
+    public String deleteSchedule(@PathVariable Integer tournamentId, @PathVariable Integer scheduleId, RedirectAttributes ra) {
+        schedulesService.delete(scheduleId);
+        ra.addFlashAttribute("success", "Delete Schedule successfully!!");
+        return "redirect:/admin/tournaments/" + tournamentId + "/schedules";
     }
 
     @PostMapping("/schedules/save")
@@ -74,5 +92,8 @@ public class ScheduleAdminController {
         }
         schedulesService.savedSchedule(schedule);
         return "redirect:/admin/tournaments/" + tournamentId + "/schedules";
+    }
+    private List<String> getCategories() {
+        return List.of("Vòng loại", "Tứ kết", "Bán kết", "Chung kết");
     }
 }

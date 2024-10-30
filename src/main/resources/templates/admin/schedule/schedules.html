@@ -11,32 +11,47 @@
 
         <!-- Main Content -->
         <main role="main" class="col-md-9ml-sm-auto col-lg-10 content mx-auto">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                 <h1 class="h2">Schedules Management</h1>
             </div>
-            <!-- Tournament Table -->
             <div th:if="${success!=null}" class="alert alert-success text-center">
                 [[${success}]]
             </div>
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
+                <table class="table table-bordered">
                     <p class="text-center h5" th:if="${message != null}" th:text="${message}"></p>
                     <thead th:if="${message == null || message == ''}">
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Athlete</th>
+                        <th>Result of round 1</th>
+                        <th>Result of round 2</th>
+                        <th>Result of round 3</th>
+                        <th>Final result</th>
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="tournament : ${tournaments}">
-                        <td th:text="${tournament.tournamentId}"></td>
-                        <td id="name" th:text="${tournament.name}"></td>
+                    <tbody th:each="schedule : ${schedules}">
+                    <tr>
+                        <td th:text="${schedule.scheduleId}"></td>
+                        <td th:text="${schedule.athlete1}"></td>
+                        <td th:text="${schedule.resultRound1Athlete1}"></td>
+                        <td th:text="${schedule.resultRound2Athlete1}"></td>
+                        <td th:text="${schedule.resultRound3Athlete1 == null ? 0 : schedule.resultRound3Athlete1}"></td>
+                        <td th:text="${finalResultAthlete1}"></td>
                         <td>
-                            <a class="btn btn-info btn-sm" th:href="@{'/admin/tournaments/' + ${tournament.tournamentId} + '/schedules'}">Schedules</a>
-                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/tournaments/update/' + ${tournament.tournamentId}}">Update</a>
-                            <a class="btn btn-danger btn-sm" th:href="@{'/admin/tournaments/delete/' + ${tournament.tournamentId}}">Delete</a>
+                            <a class="btn btn-primary btn-sm" th:href="@{'/admin/tournaments/' + ${schedule.tournament.tournamentId} + '/schedules/update/' + ${schedule.scheduleId}}">Update</a>
+                            <a class="btn btn-danger btn-sm" th:href="@{'/admin/tournaments/' + ${schedule.tournament.tournamentId} + '/schedules/delete/' + ${schedule.scheduleId}}">Delete</a>
                         </td>
+                    </tr>
+                    <tr>
+                        <td th:text="${schedule.scheduleId}"></td>
+                        <td th:text="${schedule.athlete2}"></td>
+                        <td th:text="${schedule.resultRound1Athlete2}"></td>
+                        <td th:text="${schedule.resultRound2Athlete2}"></td>
+                        <td th:text="${schedule.resultRound3Athlete2 == null ? 0 : schedule.resultRound3Athlete1}"></td>
+                        <td th:text="${finalResultAthlete2}"></td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>
