@@ -12,7 +12,7 @@
             <div class="col-sm-4">
                 <div class="mb-3">
                     <label for="category" class="form-label">Category:</label>
-                    <select id="category" name="category" th:field="${schedule.category}">
+                    <select class="form-select" id="category" name="category" th:field="${schedule.category}">
                         <option value="" disabled selected>Select category</option>
                         <option th:each="category : ${categories}"
                                 th:value="${category}"
@@ -22,13 +22,13 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <input type="hidden" th:field="${schedule.tournament}" />
             <input type="hidden" th:field="${schedule.scheduleId}" />
             <div class="col-sm-6">
                 <div class="mb-3">
                     <label for="athlete1" class="form-label">Athlete 1:</label>
-                    <select id="athlete1" name="category" th:field="${schedule.athlete1}">
+                    <select class="form-select" id="athlete1" name="category" th:field="${schedule.athlete1}">
                         <option value="" disabled selected>Select athlete 2</option>
                         <option th:each="user : ${users}"
                                 th:value="${user.fullName}"
@@ -54,7 +54,7 @@
             <div class="col-sm-6">
                 <div class="mb-3">
                     <label for="athlete2" class="form-label">Athlete 2:</label>
-                    <select id="athlete2" name="category" th:field="${schedule.athlete2}">
+                    <select class="form-select" id="athlete2" name="category" th:field="${schedule.athlete2}">
                         <option value="" disabled selected>Select athlete 2</option>
                         <option th:each="user : ${users}"
                                 th:value="${user.fullName}"
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" th:text="${schedule.scheduleId != null ? 'Update Schedule' : 'Add Schedule'}"></button>
+            <button type="submit" class="btn btn-primary col-2" th:text="${schedule.scheduleId != null ? 'Update Schedule' : 'Add Schedule'}"></button>
         </div>
     </form>
 </div>

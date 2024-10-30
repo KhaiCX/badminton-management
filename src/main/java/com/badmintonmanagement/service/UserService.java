@@ -14,10 +14,6 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public int getTotalMember() {
-        List<User> users = userRepository.findAll();
-        return users.size();
-    }
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
