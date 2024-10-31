@@ -11,7 +11,7 @@
         <div class="row">
             <div th:if="${tournamentIsNullOrEmpty != null && tournamentIsNullOrEmpty != ''}" class="card-title text-center" th:text="${tournamentIsNullOrEmpty}"></div>
             <th:block th:if="${tournamentIsNullOrEmpty == null || tournamentIsNullOrEmpty == ''}" th:each="entry : ${tournamentSchedulesMap}">
-                <h5 class="tournament">Giải cầu lông [[${entry.key.name}]]</h5>
+                <h5 class="tournament text-center">Giải cầu lông [[${entry.key.name}]]</h5>
                 <th:block th:each="schedule : ${entry.value}">
                     <div class="col-md-6">
                         <table class="table">
