@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,14 +25,17 @@ public class SchedulesController {
     public String schedules(Model model) {
         List<Tournament> tournaments = tournamentService.getAll();
         String tournamentIsNullOrEmpty = "";
+        Map<Tournament, List<Schedule>> tournamentSchedulesMap = new HashMap<>();
         if (!tournaments.isEmpty()) {
-            List<Schedule> schedules = scheduleService.getAll();
-            model.addAttribute("schedules", schedules);
+            for (Tournament tournament: tournaments) {
+                List<Schedule> schedules = scheduleService.getSchedulesByTournament(tournament);
+                tournamentSchedulesMap.put(tournament, schedules);
+            }
         } else {
             tournamentIsNullOrEmpty = "Chưa có giải đấu nào!!";
         }
         model.addAttribute("tournamentIsNullOrEmpty", tournamentIsNullOrEmpty);
-        model.addAttribute("tournaments", tournaments);
+        model.addAttribute("tournamentSchedulesMap", tournamentSchedulesMap);
         return "client/schedule/schedules";
     }
 }
