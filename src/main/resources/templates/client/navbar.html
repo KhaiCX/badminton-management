@@ -2,36 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+    <link rel="stylesheet" type="text/css" th:href="@{/client/css/navbar.css}">
+    <script type="text/javascript" th:src="@{/client/js/navbar.js}"></script>
     <div class="container-fluid">
-        <img alt="Logo" src="" th:src="@{/client/images/logo.png}" />
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-label="Toggle navigation">
+        <img style="height: 90px;" class="logo" alt="Logo" src="" th:src="@{/client/images/logo.png}" />
+        <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-label="Toggle navigation" onclick="displayNavbar()">
+            <span class="navbar-toggler-icon"></span>
+        </button>-->
+        <button class="navbar-toggler"
+                type="button" 
+                id="menuBtn">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div id="navbarNav">
+            <button type="button" id="btnClose" class="btn-close d-block d-md-none"></button>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/}">Trang chủ</a>
+                    <a class="nav-link" aria-current="page" th:href="@{/}">TRANG CHỦ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/members}">Thành viên</a>
+                    <a class="nav-link" th:href="@{/members}">THÀNH VIÊN</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/schedules}">Lịch thi đấu</a>
+                    <a class="nav-link" th:href="@{/schedules}">LỊCH THI ĐẤU</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/articles}">Tin tức</a>
+                    <a class="nav-link" th:href="@{/articles}">TIN TỨC</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/logout}">Đăng xuất</a>
+                    <a class="nav-link" th:href="@{/logout}">ĐĂNG XUẤT</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAnonymous()">
-                    <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
+                    <a class="nav-link" th:href="@{/login}">ĐĂNG NHẬP</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
 </body>
 </html>
