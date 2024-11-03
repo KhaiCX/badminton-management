@@ -1,0 +1,52 @@
+.container-fluid {
+    background-color: #df2027;
+}
+#navbarNav {
+    background-color: #df2027;
+    height: 60px;
+}
+.navbar-toggler {
+    background-color: white;
+    border: none;
+}
+.nav-link {
+    color: white;   
+}
+@media screen and (max-width: 768px) {
+    #navbarNav {
+        position: fixed;
+        top: 0;
+        right: -200px; /* Ban đầu nằm ngoài màn hình */
+        width: 180px;
+        height: 100%;
+        background-color: #df2027;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        padding-top: 8px;
+    }
+
+    /* Khi thêm class 'show', navbar sẽ trượt vào màn hình */
+    #navbarNav.show {
+        right: 0;
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Xếp các item theo cột */
+    }
+
+    .nav-link {
+        padding: 0.5rem 1rem;
+        color: #fff;
+        font-size: 1.2rem;
+    }
+    #btnClose {
+        border: none;
+        background-color: #df2027;
+        width: 50px;
+    }
+    #btnClose i {
+        font-size: 20px;
+    }
+}
