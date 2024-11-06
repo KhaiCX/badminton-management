@@ -54,8 +54,8 @@
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      document.getElementById("countdown").innerHTML = days > 1 ? days + " ngày" :
-              hours + ":" + minutes + ":" + seconds + "";
+      document.getElementById("countdown").innerHTML = days > 1 ? days + " ngày " + hours + ":" + minutes + ":" + seconds :
+              hours + ":" + minutes + ":" + seconds;
     } else {
       document.getElementById("countdown").innerHTML = "Đang diễn ra";
     }
