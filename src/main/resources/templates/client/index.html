@@ -5,9 +5,9 @@
 </head>
 
 <body>
+<h5 class="text-center">Giải đấu Great Emperor Open 2024: <p id="countdown"></p></h5>
 <!-- Navbar -->
 <nav th:replace="~{client/navbar :: navbar}"></nav>
-
 <div class="banner">
   <img style="width: 100%;" th:src="@{/client/images/banner.jpg}" alt="" src="">
 </div>
@@ -44,5 +44,23 @@
 </div>
 <!-- Footer -->
 <footer th:replace="~{client/footer :: footer}"></footer>
+<script>
+  const endTime = new Date("[[${endTime}]]");
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = endTime - now;
+    if (distance >= 0) {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24))
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("countdown").innerHTML = days > 1 ? days + " ngày" :
+              hours + ":" + minutes + ":" + seconds + "";
+    } else {
+      document.getElementById("countdown").innerHTML = "Đang diễn ra";
+    }
+  }
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
