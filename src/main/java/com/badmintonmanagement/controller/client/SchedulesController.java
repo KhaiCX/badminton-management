@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,8 @@ public class SchedulesController {
 
     @GetMapping
     public String schedules(Model model) {
-        List<Tournament> tournaments = tournamentService.getAll();
+        List<Tournament> tournaments = tournamentService.getAll().stream()
+                .sorted(Comparator.comparingInt(Tournament::getTournamentId).reversed()).toList();
         String tournamentIsNullOrEmpty = "";
         Map<Tournament, List<Schedule>> tournamentSchedulesMap = new HashMap<>();
         if (!tournaments.isEmpty()) {

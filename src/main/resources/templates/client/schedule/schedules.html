@@ -27,7 +27,8 @@
                                 <td class=>
                                     <img th:if="${schedule.imageAthlete1 != null && schedule.imageAthlete1 != ''}" th:src="@{'/client/images/member/' + ${schedule.imageAthlete1}}" alt="Image Athlete one" class="flag" src="">
                                     <img th:if="${schedule.imageAthlete1 == null || schedule.imageAthlete1 == ''}" th:src="@{/client/images/member/default_user.jpg}" alt="Image Athlete one" class="flag" src="">
-                                    <span th:class="${schedule.finalResultAthlete1 > schedule.finalResultAthlete2 ? 'winner' : 'loser'}">[[${schedule.athlete1}]]</span>
+                                    <span th:if="${schedule.finalResultAthlete1 == null || schedule.finalResultAthlete1 == ''}" class="winner">[[${schedule.athlete1}]]</span>
+                                    <span th:if="${schedule.finalResultAthlete1 != null && schedule.finalResultAthlete1 != ''}" th:class="${schedule.finalResultAthlete1 > schedule.finalResultAthlete2 ? 'winner' : 'loser'}">[[${schedule.athlete1}]]</span>
                                 </td>
                                 <!--<td th:class="${schedule.finalResultAthlete1 > schedule.finalResultAthlete2 ? 'winner' : 'loser'}" th:text="${schedule.resultRound1Athlete1 == null || schedule.resultRound2Athlete1 == null || schedule.resultRound3Athlete1 == null ? schedule.finalResultAthlete1 : schedule.resultRound1Athlete1 + ' ' + schedule.resultRound2User1 + ' ' + schedule.resultRound3User1}"></td>-->
                                 <td th:class="${schedule.finalResultAthlete1 > schedule.finalResultAthlete2 ? 'winner' : 'loser'}" th:text="${schedule.finalResultAthlete1}"></td>
@@ -37,7 +38,8 @@
                                 <td>
                                     <img th:if="${schedule.imageAthlete2 != null && schedule.imageAthlete2 != ''}" th:src="@{'/client/images/member/' + ${schedule.imageAthlete2}}" alt="Image User two" class="flag" src="">
                                     <img th:if="${schedule.imageAthlete2 == null || schedule.imageAthlete2 == ''}" th:src="@{/client/images/member/default_user.jpg}" alt="Image User two" class="flag" src="">
-                                    <span th:class="${schedule.finalResultAthlete2 < schedule.finalResultAthlete1 ? 'loser' : 'winner'}">[[${schedule.athlete2}]]</span>
+                                    <span th:if="${schedule.finalResultAthlete2 == null || schedule.finalResultAthlete2 == ''}" class="winner">[[${schedule.athlete2}]]</span>
+                                    <span th:if="${schedule.finalResultAthlete2 != null && schedule.finalResultAthlete2 != ''}" th:class="${schedule.finalResultAthlete2 > schedule.finalResultAthlete2 ? 'winner' : 'loser'}">[[${schedule.athlete2}]]</span>
                                 </td>
                                 <!--<td th:class="${schedule.finalResultAthlete2 < schedule.finalResultAthlete1 ? 'loser' : 'winner'}" th:text="${schedule.resultRound1Athlete2 == null || schedule.resultRound2Athlete2 == null || schedule.resultRound3Athlete2 == null ? schedule.finalResultAthlete2 : schedule.resultRound1Athlete2 + ' ' + schedule.resultRound2Athlete2 + ' ' + schedule.resultRound3Athlete2}"></td>-->
                                 <td th:class="${schedule.finalResultAthlete2 < schedule.finalResultAthlete1 ? 'loser' : 'winner'}" th:text="${schedule.finalResultAthlete2}"></td>
