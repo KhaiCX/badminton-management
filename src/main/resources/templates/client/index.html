@@ -23,7 +23,7 @@
       <div class="col-md-8">
         <div class="ratio ratio-16x9">
           <video controls>
-            <source th:src="@{'/client/video/' + content.video}" loop type="video/mp4" src="">
+            <source th:src="@{'/client/video/' + ${content.video}}" loop type="video/mp4" src="">
             Trình duyệt của bạn không hỗ trợ thẻ video.
           </video>
         </div>
