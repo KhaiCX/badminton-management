@@ -5,7 +5,6 @@
 </head>
 
 <body>
-<h5 class="text-center">Giải đấu Great Emperor Open 2024: <p id="countdown"></p></h5>
 <!-- Navbar -->
 <nav th:replace="~{client/navbar :: navbar}"></nav>
 <div class="banner">
@@ -18,29 +17,19 @@
 </div>
 
 <div class="container my-5">
-  <h2 class="mb-4">Giải cầu lông God of Thunder 2024</h2>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="ratio ratio-16x9">
-        <video controls>
-          <source th:src="@{/client/video/video1.mp4}" loop type="video/mp4" src="">
-          Trình duyệt của bạn không hỗ trợ thẻ video.
-        </video>
+  <th:block th:each="content : ${contents}">
+    <h2 class="mb-4" th:text="${content.title}"></h2>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="ratio ratio-16x9">
+          <video controls>
+            <source th:src="@{'/client/video/' + content.video}" loop type="video/mp4" src="">
+            Trình duyệt của bạn không hỗ trợ thẻ video.
+          </video>
+        </div>
       </div>
     </div>
-  </div>
-  <div style="margin-bottom: 40px"></div>
-  <h2 class="mb-4">Random lịch đấu Great Emperor Open 2024</h2>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="ratio ratio-16x9">
-        <video controls>
-          <source th:src="@{/client/video/video2.mp4}" loop type="video/mp4" src="">
-          Trình duyệt của bạn không hỗ trợ thẻ video.
-        </video>
-      </div>
-    </div>
-  </div>
+  </th:block>
 </div>
 <!-- Footer -->
 <footer th:replace="~{client/footer :: footer}"></footer>
